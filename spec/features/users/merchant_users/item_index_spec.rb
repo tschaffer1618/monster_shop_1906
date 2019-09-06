@@ -39,6 +39,27 @@ RSpec.describe "Merchant Dashboard" do
     end
   end
 
+  it 'merchant admin can activate/deactivate shop items' do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_admin)
+
+    visit merchant_user_index_path
+
+    within "#item-#{@item_1.id}" do
+      click_link "Deactivate"
+    end
+
+    expect(current_path).to eq(merchant_user_index_path)
+    expect(page).to have_content("This item is no longer for sale")
+
+    within "#item-#{@item_1.id}" do
+      click_link "Activate"
+    end
+
+    expect(current_path).to eq(merchant_user_index_path)
+    expect(page).to have_content("This item is now available for sale")
+  end
+
+
   it 'merchant employee sees link to view shop items' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_employee)
 
