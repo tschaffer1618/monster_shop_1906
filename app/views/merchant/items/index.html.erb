@@ -35,7 +35,7 @@
                 <% else %>
                   <p>Inactive</p>
                   <% if current_merchant_admin? %>
-                    <%= link_to "Activate", "/merchant/items/#{item.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
+                    <%= link_to "Activate", "/merchant/items/#{item.id}/update_status", method: :patch, class: "btn btn-success item-buttons"%>
                   <% end %>
                 <% end %></td>
                 <td><%= link_to "Edit", edit_merchant_user_path(item) %></td>
