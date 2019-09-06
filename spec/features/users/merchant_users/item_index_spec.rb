@@ -72,7 +72,7 @@ RSpec.describe "Merchant Dashboard" do
     visit merchant_user_index_path
 
     within "#item-#{item_1.id}" do
-      click_button "Deactivate"
+      click_link "Deactivate"
     end
 
     expect(current_path).to eq(merchant_user_index_path)
@@ -80,7 +80,7 @@ RSpec.describe "Merchant Dashboard" do
 
     within "#item-#{item_1.id}" do
       expect(page).to have_content("Inactive")
-      click_button "Activate"
+      click_link "Activate"
     end
 
     expect(current_path).to eq(merchant_user_index_path)

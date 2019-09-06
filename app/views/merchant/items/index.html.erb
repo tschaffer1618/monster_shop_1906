@@ -30,18 +30,12 @@
                 <td><% if item.active? %>
                   <p>Active</p>
                   <% if current_merchant_admin? %>
-                    <%= form_for(item, url: "/merchant/items/#{item.id}/update_status", method: :patch) do |f| %>
-                      <%= f.hidden_field "[active?]", value: false %>
-                      <%= f.submit "Deactivate" %>
-                    <% end %>
+                    <%= link_to "Deactivate", "/merchant/items/#{item.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
                   <% end %>
                 <% else %>
                   <p>Inactive</p>
                   <% if current_merchant_admin? %>
-                    <%= form_for(item, url: "/merchant/items/#{item.id}/update_status", method: :patch) do |f| %>
-                      <%= f.hidden_field "[active?]", value: true %>
-                      <%= f.submit "Activate" %>
-                    <% end %>
+                    <%= link_to "Activate", "/merchant/items/#{item.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
                   <% end %>
                 <% end %></td>
                 <td><%= link_to "Edit", edit_merchant_user_path(item) %></td>
