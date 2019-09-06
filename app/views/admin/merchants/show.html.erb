@@ -1,1 +1,30 @@
-<p>This needs to be just like the merchant dashboard- FIX ME LATER</p>
+<center>
+  <h3><%= link_to @merchant.name, "/merchants/#{@merchant.id}" %></h3>
+  <h3><%= @merchant.address %></h3>
+  <h3><%= "#{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></h3>
+</center>
+<br><br>
+
+<h1 align = "center">Pending Orders</h1>
+<center>
+  <table>
+    <tr>
+      <th>Order ID</th>
+      <th>Order Date</th>
+      <th>Quantity of Items</th>
+      <th>Order Total</th>
+    </tr>
+    <% unless @merchant.no_orders? %>
+      <% @merchant.pending_orders.each do |order|%>
+        <tr>
+        <section id = "order-<%=order.id%>">
+            <td><p> <%=link_to "Order ##{order.id}", merchant_order_path(order) %></p></td>
+            <td><p><%= order.created_at.strftime('%D')%></p></td>
+            <td><p><%= order.total_items%></p></td>
+            <td><p><%= number_to_currency(order.grandtotal) %></p></td>
+          </section>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</center>
