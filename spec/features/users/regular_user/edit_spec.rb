@@ -86,6 +86,12 @@ RSpec.describe "User Profile" do
 
     expect(current_path).to eq("/profile/edit_password")
 
+    fill_in "Password", with: ""
+    fill_in "Password confirmation", with: "apple123"
+    click_on "Update"
+
+    expect(page).to have_content("Password confirmation doesn't match Password")
+
     fill_in "Password", with: "apple123"
     fill_in "Password confirmation", with: "apple123"
     click_on "Update"
