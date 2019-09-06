@@ -130,7 +130,7 @@ RSpec.describe "Admin Dashboard page" do
     end
   end
 
-  xit 'user cannot cancel order once shipped' do
+  it 'user cannot cancel order once shipped' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@regular_user_1)
 
     visit order_path(@order_2)
