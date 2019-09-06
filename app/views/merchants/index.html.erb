@@ -7,16 +7,10 @@
         <p>Located in: <%= merchant.city %>, <%= merchant.state %></p>
         <% if merchant.enabled? %>
           <p>Current status: enabled</p>
-          <%= form_for(merchant, url: "/merchants/#{merchant.id}/update_status", method: :patch) do |f| %>
-            <%= f.hidden_field "[enabled?]", value: false %>
-            <%= f.submit "Disable" %>
-          <% end %>
+          <%= button_to "Disable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
         <% else %>
           <p>Current status: disabled</p>
-          <%= form_for(merchant, url: "/merchants/#{merchant.id}/update_status", method: :patch) do |f| %>
-            <%= f.hidden_field "[enabled?]", value: true %>
-            <%= f.submit "Enable" %>
-          <% end %>
+          <%= button_to "Enable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
         <% end %>
       </section>
     <% end %>
