@@ -7,10 +7,10 @@
         <p>Located in: <%= merchant.city %>, <%= merchant.state %></p>
         <% if merchant.enabled? %>
           <p>Current status: enabled</p>
-          <%= button_to "Disable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
+          <%= link_to "Disable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
         <% else %>
           <p>Current status: disabled</p>
-          <%= button_to "Enable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
+          <%= link_to "Enable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
         <% end %>
       </section>
     <% end %>

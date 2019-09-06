@@ -36,7 +36,7 @@ RSpec.describe "Admin_user Merchant Index Page " do
     visit merchants_path
     within "#merchant-#{@merchant_1.id}" do
       expect(page).to have_content("Current status: enabled")
-      click_button("Disable")
+      click_link("Disable")
     end
 
     expect(current_path).to eq(merchants_path)
@@ -44,7 +44,7 @@ RSpec.describe "Admin_user Merchant Index Page " do
 
     within "#merchant-#{@merchant_1.id}" do
       expect(page).to have_content("Current status: disabled")
-      click_button("Enable")
+      click_link("Enable")
     end
 
     expect(current_path).to eq(merchants_path)
@@ -60,7 +60,7 @@ RSpec.describe "Admin_user Merchant Index Page " do
     visit merchants_path
 
     within "#merchant-#{@merchant_1.id}" do
-      click_button("Disable")
+      click_link("Disable")
     end
 
     visit items_path
@@ -71,7 +71,7 @@ RSpec.describe "Admin_user Merchant Index Page " do
     visit merchants_path
 
     within "#merchant-#{@merchant_1.id}" do
-      click_button("Enable")
+      click_link("Enable")
     end
 
     visit items_path
