@@ -45,11 +45,7 @@ class ReviewsController<ApplicationController
   private
 
   def review_params
-    if params[:review]
-      params.require(:review).permit(:title,:content,:rating)
-    else
-      params.permit(:title,:content,:rating)
-    end
+    params.require(:review).permit(:title,:content,:rating)
   end
 
   def field_empty?
