@@ -69,5 +69,11 @@ describe Item, type: :model do
       @chain.increase_inventory(@item_order_1)
       expect(@chain.inventory).to eq(7)
     end
+
+    it "can toggle status" do
+      expect(@chain.active?).to be true
+      @chain.toggle_status
+      expect(@chain.active?).to be false
+    end
   end
 end
