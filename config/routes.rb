@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :reviews, except: [:show, :index]
   end
 
-  resources :orders, only: [:new, :create]
+  # resources :orders, only: [:new, :create]
   patch "/orders/:id", to: "orders#cancel", as: :order_cancel
 
   namespace :admin do
@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   patch "/profile/update_password", to: "users#update_password"
   get "/profile/orders", to: "users#show_orders"
   post "/profile/orders", to: "orders#create"
+  get "/profile/orders/new", to: "orders#new"
   get "/profile/orders/:id", to: "users#show_order"
 
   post "/cart/:item_id", to: "cart#add_item"

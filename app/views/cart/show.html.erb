@@ -48,7 +48,7 @@
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
 
   <% unless current_user.nil? %>
-    <p><%= link_to "Checkout", new_order_path, method: :get %></p>
+    <p><%= link_to "Checkout", '/profile/orders/new', method: :get %></p>
     <% end %>
 <% else %>
   <h3 align= "center">Cart is currently empty</h3>
