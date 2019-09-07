@@ -30,8 +30,21 @@ describe Order, type: :model do
       @user.item_orders.create!(order: @order_1, item: @tire, price: @tire.price, quantity: 2)
       @user.item_orders.create!(order: @order_1, item: @pull_toy, price: @pull_toy.price, quantity: 3)
     end
+
     it 'grandtotal' do
       expect(@order_1.grandtotal).to eq(230)
+    end
+
+    it 'total_items' do
+      expect(@order_1.total_items).to eq(5)
+    end
+
+    it 'to_s' do
+      expect(@order_1.to_s).to eq("Meg\n    123 Stang Ave\n    Hershey, PA\n    17033\n    ")
+    end
+
+    it 'update_status' do
+      expect(@order_1.update_status).to eq(true)
     end
   end
 end
