@@ -54,4 +54,10 @@
         <% end %>
       </tbody>
   </table>
+  <br>
+  <center>
+  <section id="cancel-order">
+    <%= link_to_if(@order.status == 'pending', "Cancel Order", order_cancel_path, method: :patch, class: "btn btn-danger item-buttons"){}%>
+  </section>
+  </center>
 </div>
