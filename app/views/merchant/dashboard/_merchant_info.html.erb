@@ -18,7 +18,7 @@
       <% @merchant.pending_orders.each do |order|%>
         <tr>
         <section id = "order-<%=order.id%>">
-            <td><p> <%=link_to "Order ##{order.id}", merchant_order_path(order) %></p></td>
+            <td><p> <%=link_to_if(current_user.role != "admin_user", "Order ##{order.id}", merchant_order_path(order))%></p></td>
             <td><p><%= order.created_at.strftime('%D')%></p></td>
             <td><p><%= order.total_items%></p></td>
             <td><p><%= number_to_currency(order.grandtotal) %></p></td>
