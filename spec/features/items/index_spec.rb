@@ -65,6 +65,7 @@ RSpec.describe "Items Index Page" do
       item_4 = shop.items.create(attributes_for(:item, name: "pear"))
       item_5 = shop.items.create(attributes_for(:item, name: "lychee"))
       item_6 = shop.items.create(attributes_for(:item, name: "watermelon"))
+      items = [item_1, item_2, item_3, item_4, item_5, item_6]
 
       user = create(:user)
       order_1 = create(:order)
@@ -96,6 +97,7 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_content(4)
         expect(page).to have_content(item_2.name)
         expect(page).to have_content(2)
+        expect(page).not_to have_content(item_1.name)
       end
 
       within "#bottom_five" do
@@ -109,7 +111,11 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_content(4)
         expect(page).to have_content(item_2.name)
         expect(page).to have_content(2)
+        expect(page).not_to have_content(item_6.name)
       end
+
+      # expect(items.top_5).to eq([item_6])
+      # expect(items.bottom_5).to eq(item_6)
     end
   end
 end
