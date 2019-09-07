@@ -38,4 +38,20 @@ class Item <ApplicationRecord
       "Cannot fulfill. There are no #{self.name} items remaining."
     end
   end
+
+  def self.top_5
+    Item.joins(:item_orders)
+        .group(:id)
+        .select("items.name, sum(item_orders.quantity) as popularity")
+        .order("popularity DESC")
+        .limit(5)
+  end
+
+  def self.bottom_5
+    Item.joins(:item_orders)
+        .group(:id)
+        .select("items.name, sum(item_orders.quantity) as popularity")
+        .order("popularity")
+        .limit(5)
+  end
 end
