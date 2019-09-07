@@ -38,7 +38,8 @@ RSpec.describe "Admin_user Merchant Show Page " do
     expect(page).to have_content("#{@bike_shop.city}, #{@bike_shop.state} #{@bike_shop.zip}")
 
     within "#order-#{@order_1.id}" do
-      expect(page).to have_link("Order ##{@order_1.id}")
+      expect(page).not_to have_link("Order ##{@order_1.id}")
+      expect(page).to have_content("Order ##{@order_1.id}")
       expect(page).to have_content(@order_1.created_at.strftime('%D'))
       expect(page).to have_content(@order_1.total_items)
       expect(page).to have_content("$150")
