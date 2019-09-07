@@ -70,4 +70,33 @@ describe Item, type: :model do
       expect(@chain.inventory).to eq(7)
     end
   end
+
+  describe "top and bottom five" do
+    it "shows an area with statistics of top/bottom 5 most/least popular items (by quantity purchased), plus that quantity" do
+      shop = create(:merchant)
+      item_1 = shop.items.create(attributes_for(:item, name: "apple"))
+      item_2 = shop.items.create(attributes_for(:item, name: "orange"))
+      item_3 = shop.items.create(attributes_for(:item, name: "banana"))
+      item_4 = shop.items.create(attributes_for(:item, name: "pear"))
+      item_5 = shop.items.create(attributes_for(:item, name: "lychee"))
+      item_6 = shop.items.create(attributes_for(:item, name: "watermelon"))
+      items = [item_1, item_2, item_3, item_4, item_5, item_6]
+
+      user = create(:user)
+      order_1 = create(:order)
+      item_order_1 = user.item_orders.create!(order: order_1, item: item_6, quantity: 6, price: item_6.price)
+      item_order_2 = user.item_orders.create!(order: order_1, item: item_5, quantity: 5, price: item_5.price)
+      item_order_3 = user.item_orders.create!(order: order_1, item: item_4, quantity: 4, price: item_4.price)
+      item_order_4 = user.item_orders.create!(order: order_1, item: item_3, quantity: 3, price: item_3.price)
+
+      order_2 = create(:order)
+      item_order_5 = user.item_orders.create!(order: order_2, item: item_6, quantity: 6, price: item_6.price)
+      item_order_6 = user.item_orders.create!(order: order_2, item: item_1, quantity: 1, price: item_1.price)
+      item_order_7 = user.item_orders.create!(order: order_2, item: item_2, quantity: 2, price: item_2.price)
+      item_order_8 = user.item_orders.create!(order: order_2, item: item_3, quantity: 3, price: item_3.price)
+
+      expect(Item.top_5.map { |item| item.name }).to eq([item_6.name, item_3.name, item_5.name, item_4.name, item_2.name])
+      expect(Item.bottom_5.map { |item| item.name }).to eq([item_1.name, item_2.name, item_4.name, item_5.name, item_3.name])
+    end
+  end
 end
