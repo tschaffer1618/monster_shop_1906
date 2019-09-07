@@ -75,5 +75,11 @@ describe Merchant, type: :model do
 
       expect(item.active?).to be false
     end
+
+    it "pending_orders" do
+      order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      item_order_1 = @user.item_orders.create!(order: order_1, item: @tire, price: @tire.price, quantity: 2)
+      expect(@meg.pending_orders).to eq([order_1])
+    end
   end
 end
