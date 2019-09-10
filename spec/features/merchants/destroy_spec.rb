@@ -1,13 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe "As a visitor" do
+RSpec.describe "As an admin user" do
   describe "When I visit a merchant show page" do
+    before(:each) do
+      admin = create(:user, role: 3)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+    end
+    
     it "I can delete a merchant" do
       bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Richmond', state: 'VA', zip: 80203)
 
-      visit merchant_path(bike_shop)
+      visit merchants_path
 
-      click_on "Delete Merchant"
+      click_on "Delete"
 
       expect(current_path).to eq(merchants_path)
       expect(page).to_not have_content("Brian's Bike Shop")
@@ -17,9 +22,9 @@ RSpec.describe "As a visitor" do
       bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       chain = bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
 
-      visit merchant_path(bike_shop)
+      visit merchants_path
 
-      click_on "Delete Merchant"
+      click_on "Delete"
 
       expect(current_path).to eq(merchants_path)
       expect(page).to_not have_content("Brian's Bike Shop")
@@ -72,8 +77,8 @@ RSpec.describe "As a visitor" do
 
       click_button "Create Order"
 
-      visit merchant_path(meg)
-      expect(page).to_not have_link("Delete Merchant")
+      visit merchants_path
+      expect(page).to_not have_link("Delete")
     end
   end
 end
