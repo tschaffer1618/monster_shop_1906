@@ -1,22 +1,3 @@
 <h1>Create New Item For <%=link_to @merchant.name, "/merchants/#{@merchant.id}" %></h1>
 
-<center>
-  <%= form_for(@item, url: merchant_user_index_path) do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name%>
-
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-
-    <%= f.label :price %>
-    <%= f.number_field :price %>
-
-    <%= f.label :image %>
-    <%= f.text_field :image %>
-
-    <%= f.label :inventory %>
-    <%= f.number_field :inventory %>
-
-    <%= f.submit "Create Item" %>
-  <% end %>
-</center>
+<%= render partial: 'form_item', locals: {path: merchant_user_index_path} %>
