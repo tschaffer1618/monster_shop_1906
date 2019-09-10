@@ -1,5 +1,10 @@
 class UsersController< ApplicationController
   before_action :require_user, except: [:new, :create]
+  before_action :set_user, except: [:new, :create]
+
+  def set_user
+    @user = current_user
+  end
 
   def new
     @user = User.new
@@ -18,16 +23,13 @@ class UsersController< ApplicationController
   end
 
   def show
-    @user = current_user
     render :profile
   end
 
   def edit
-    @user = current_user
   end
 
   def update
-    @user = current_user
     @user.update(user_params)
     if @user.save
       flash[:success] = "Your profile has been updated"
@@ -39,11 +41,9 @@ class UsersController< ApplicationController
   end
 
   def edit_password
-    @user = current_user
   end
 
   def update_password
-    @user = current_user
     @user.update(user_params)
     if @user.save
       flash[:success] = "Your password has been updated"
@@ -55,14 +55,13 @@ class UsersController< ApplicationController
   end
 
   def show_orders
-    @user = current_user
     @item_orders = @user.item_orders
   end
 
   def show_order
-    @user = current_user
-    @item_orders = @user.item_orders
     @order = Order.find(params[:id])
+    @item_orders = @user.item_orders
+    @indiv_order = @item_orders.where("order_id=#{@order.id}").group_by(&:order_id)
   end
 
   private
