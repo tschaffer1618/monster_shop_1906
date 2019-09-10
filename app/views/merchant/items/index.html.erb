@@ -28,6 +28,7 @@
                 <td><%= number_to_currency(item.price) %></td>
                 <td><%= item.inventory %></td>
                 <td><%= item.active? %></td>
+                <td><%= link_to "Edit", edit_merchant_user_path(item) %></td>
                 <% if item.no_orders? %>
                   <td><%= link_to "Delete", "/merchant/items/#{item.id}", method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger item-buttons" %></td>
                 <% end %>

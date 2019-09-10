@@ -1,0 +1,4 @@
+<h1>Edit New Item For <%=link_to @merchant.name, "/merchants/#{@merchant.id}" %></h1>
+
+
+<%= render partial: 'form_item', locals: {path: "/merchant/items/#{@item.id}"} %>
