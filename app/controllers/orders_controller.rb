@@ -31,7 +31,6 @@ class OrdersController <ApplicationController
 
 
   private
-
   def order_params
     params.permit(:name, :address, :city, :state, :zip)
   end
