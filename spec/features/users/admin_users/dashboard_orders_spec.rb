@@ -36,15 +36,12 @@ RSpec.describe "Admin Dashboard page" do
 
     @admin_1 = create(:user, name: "Admin 1", role: 3)
 
-
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
   end
 
   it 'can show all orders sorted by status' do
 
     visit admin_path
-
-    # save_and_open_page
 
     within "#orders-#{@order_1.id}-3" do
       expect(page).to have_content(@regular_user_1.name)
@@ -95,18 +92,37 @@ RSpec.describe "Admin Dashboard page" do
 
     within "#orders-#{@order_2.id}-1" do
       expect(page).to have_content("packaged")
-      expect(page).to have_link("Ship Item")
+      expect(page).to have_button("Ship Item")
     end
 
     within "#orders-#{@order_6.id}-2" do
       expect(page).to have_content("packaged")
-      expect(page).to have_link("Ship Item")
+      expect(page).to have_button("Ship Item")
     end
 
     within "#orders-#{@order_4.id}-6" do
       expect(page).to have_content("cancelled")
-      expect(page).not_to have_link("Ship Item")
+      expect(page).not_to have_button("Ship Item")
       expect(page).to have_content("No Action Available")
+    end
+  end
+  it 'click the Ship Item button updates the status' do
+    visit admin_path
+
+    within "#orders-#{@order_2.id}-1" do
+      click_button("Ship Item")
+    end
+
+    expect(current_path).to eq(admin_path)
+
+    expect(page).to have_content("Order ##{@order_2.id} has been shipped!")
+
+    within "#orders-#{@order_2.id}-5" do
+      expect(page).to have_content(@regular_user_2.name)
+      expect(page).to have_content(@order_2.id)
+      expect(page).to have_content(@order_2.created_at)
+      expect(page).to have_content("shipped")
+      expect(page).to_not have_content("pending")
     end
   end
 end
