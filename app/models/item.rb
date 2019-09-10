@@ -11,7 +11,6 @@ class Item <ApplicationRecord
   validates_numericality_of :price, greater_than: 0
   validates_numericality_of :inventory, greater_than_or_equal_to: 0, only_integer: true
 
-
   def average_review
     reviews.average(:rating)
   end
@@ -22,5 +21,17 @@ class Item <ApplicationRecord
 
   def no_orders?
     item_orders.empty?
+  end
+
+  def decrease_inventory(item_order)
+    self.update(inventory: self.inventory - item_order.quantity)
+  end
+
+  def cannot_fulfill_message
+    if self.inventory > 0
+      "Cannot fulfill. Only #{self.inventory} remaining."
+    else
+      "Cannot fulfill. There are no #{self.name} items remaining."
+    end
   end
 end

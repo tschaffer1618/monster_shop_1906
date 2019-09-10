@@ -63,7 +63,6 @@ RSpec.describe "Show Merchant Dashboard" do
       click_on "Submit"
 
       expect(current_path).to eq(merchant_user_path)
-
       within "#order-#{order_1.id}" do
         expect(page).to have_link("Order ##{order_1.id}")
         expect(page).to have_content(order_1.created_at.strftime('%D'))

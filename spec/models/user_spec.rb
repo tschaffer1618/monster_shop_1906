@@ -19,8 +19,7 @@ describe User, type: :model do
 
   describe "relationships" do
     it {should have_many :item_orders}
-    it { should belong_to(:merchant).optional }
-    #it {should have_many (:items).through(:merchant)}
+    it {should belong_to(:merchant).optional }
   end
 
   describe "roles" do
@@ -84,7 +83,7 @@ describe User, type: :model do
     before(:each) do
       user_1 = create(:user, email: "bob@gmail.com")
     end
-    
+
     it "a different type of user has valid attributes" do
       regular_user = create(:user)
       merchant_employee = create(:user, role: 1)
@@ -100,6 +99,29 @@ describe User, type: :model do
     it "a new user must have a unique email" do
       user_2 = build(:user, email: "bob@gmail.com")
       expect(user_2).to_not be_valid
+    end
+  end
+
+  describe "methods" do
+    it 'can find item orders by merchant user with order id' do
+      regular_user_1 = create(:user)
+
+      merchant_shop_1 = create(:merchant, name: "Merchant Shop 1")
+        item_1 = merchant_shop_1.items.create!(attributes_for(:item, name: "Item 1" ))
+        item_2 = merchant_shop_1.items.create!(attributes_for(:item, name: "Item 2"))
+
+      order_1 = create(:order)
+        item_order_1 = regular_user_1.item_orders.create!(order: order_1, item: item_1, quantity: 2, price: item_1.price, user: regular_user_1)
+        item_order_2 = regular_user_1.item_orders.create!(order: order_1, item: item_2, quantity: 8, price: item_2.price, user: regular_user_1)
+
+      order_2 = create(:order)
+        item_order_4 = regular_user_1.item_orders.create(order: order_2, item: item_2, quantity: 18, price: item_2.price, user: regular_user_1)
+
+      merchant_admin = create(:user, role: 2, merchant: merchant_shop_1)
+
+      expected = [item_order_1, item_order_2]
+
+      expect(expected).to eq(merchant_admin.item_orders_by_merchant(order_1))
     end
   end
 end

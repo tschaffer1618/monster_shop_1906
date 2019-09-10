@@ -7,6 +7,9 @@ RSpec.describe "Admin_user Merchant Index Page " do
 
     @merchant_1 =  create(:merchant)
     @merchant_2 =  create(:merchant, enabled?: false)
+
+    @item_1 = @merchant_1.items.create!(attributes_for(:item))
+    @item_2 = @merchant_1.items.create!(attributes_for(:item))
   end
 
   it "shows all merchants with pertinent info and links to individual merchants" do
@@ -46,5 +49,34 @@ RSpec.describe "Admin_user Merchant Index Page " do
 
     expect(current_path).to eq(merchants_path)
     expect(page).to have_content("#{@merchant_1.name} is now enabled")
+  end
+
+  it "deactivates/activates all merchant items when the merchant is disabled/enabled" do
+    visit items_path
+
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@item_2.name)
+
+    visit merchants_path
+
+    within "#merchant-#{@merchant_1.id}" do
+      click_button("Disable")
+    end
+
+    visit items_path
+
+    expect(page).to_not have_content(@item_1.name)
+    expect(page).to_not have_content(@item_2.name)
+
+    visit merchants_path
+
+    within "#merchant-#{@merchant_1.id}" do
+      click_button("Enable")
+    end
+
+    visit items_path
+
+    expect(page).to have_content(@item_1.name)
+    expect(page).to have_content(@item_2.name)
   end
 end

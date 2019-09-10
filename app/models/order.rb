@@ -1,5 +1,6 @@
 class Order <ApplicationRecord
-  validates_presence_of :name, :address, :city, :state, :zip
+  validates_presence_of :name, :address, :city, :state, :zip, :status
+  validates :status, inclusion: {:in => ['pending', 'packaged', 'shipped', 'cancelled']}
 
   has_many :item_orders
   has_many :items, through: :item_orders

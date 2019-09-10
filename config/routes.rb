@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     resources :merchants, only: [:show]
   end
 
+  patch "/merchant/:order_id/:item_order_id/fulfill", to: "merchant/orders#fulfill"
+
   patch "/merchants/:id/update_status", to: "merchants#update_status"
 
   get "/register", to: "users#new"
