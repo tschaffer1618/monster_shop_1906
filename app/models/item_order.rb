@@ -6,6 +6,7 @@ class ItemOrder <ApplicationRecord
   belongs_to :user
   has_many :merchants, through: :item
 
+
   def subtotal
     price * quantity
   end
