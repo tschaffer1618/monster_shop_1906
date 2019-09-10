@@ -22,4 +22,12 @@ class Order <ApplicationRecord
     "
   end
 
+  def find_user_name
+    find_user.name
+  end
+
+  def find_user
+    user_id = self.item_orders.distinct.pluck(:user_id).join
+    user = User.find(user_id)
+  end
 end
