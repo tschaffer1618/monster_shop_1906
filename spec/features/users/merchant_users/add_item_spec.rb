@@ -95,6 +95,28 @@ RSpec.describe "Merchant Items Page" do
           expect(page).to have_css("img[src*='https://avatars3.githubusercontent.com/u/6475745?s=88&v=4']")
         end
       end
+
+      describe "If I put in an invalid image url" do
+        it "I get a flash message and redirect back to form page" do
+          visit new_merchant_user_path
+
+          name = "Chamois Buttr"
+          price = 18
+          description = "No more chaffin'!"
+          image = "foo.png"
+          inventory = 25
+
+          fill_in "Name", with: name
+          fill_in "Price", with: price
+          fill_in "Description", with: description
+          fill_in "Image", with: image
+          fill_in "Inventory", with: inventory
+
+          click_button "Create Item"
+
+          expect(page).to have_content("Image is not a valid HTTP URL")
+        end
+      end
     end
   end
 end
