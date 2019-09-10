@@ -1,6 +1,7 @@
 <center><h1>My Items</h1> </center>
 
 <div class="container">
+  <p><%= link_to "Add New Item", new_merchant_item_path(@merchant_id) %></p>
   <h4>Item Information</h4>
     <table class="table">
       <thead class="thead-light">
@@ -23,7 +24,7 @@
                   <td><%= item.id %></td>
                 <td><img id='thumbnail-<%= item.id %>'><%= image_tag item.image, class: 'img_thumbnail' %></img></td>
                 <td><%= item.description %></td>
-                <td><%= item.price %></td>
+                <td><%= number_to_currency(item.price) %></td>
                 <td><%= item.inventory %></td>
                 <td><%= item.active? %></td>
               </tr>
