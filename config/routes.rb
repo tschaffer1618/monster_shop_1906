@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get "/", to: "dashboard#index", as: :user
     resources :orders, only: [:show]
     get "/orders/:id", to: "dashboard#show", as: :orders_show
-    resources :items, only: [:index, :new, :create, :destroy], as: :user
+    resources :items, as: :user
   end
 
   resources :merchants do
