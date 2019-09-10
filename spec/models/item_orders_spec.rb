@@ -66,5 +66,12 @@ describe ItemOrder, type: :model do
 
       expect(@item_order_1.fulfilled?).to eq(true)
     end
+
+    it 'display_info' do
+      info = ItemOrder.display_info(@order_1)
+
+      expect(info.keys.include? @order_1.id).to eq(true)
+      expect(info.values.flatten.count).to eq(2)
+    end
   end
 end

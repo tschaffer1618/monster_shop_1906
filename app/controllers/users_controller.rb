@@ -61,7 +61,7 @@ class UsersController< ApplicationController
   def show_order
     @order = Order.find(params[:id])
     @item_orders = @user.item_orders
-    @indiv_order = @item_orders.where("order_id=#{@order.id}").group_by(&:order_id)
+    @indiv_order = @item_orders.display_info(@order)
   end
 
   private
