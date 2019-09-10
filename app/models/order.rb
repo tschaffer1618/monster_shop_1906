@@ -23,4 +23,10 @@ class Order <ApplicationRecord
     #{self.zip}
     "
   end
+
+  def update_status
+   self.update(status: 'packaged') if item_orders.all? { |item_order| item_order.fulfilled?}
+   self.save
+  end
+  
 end
