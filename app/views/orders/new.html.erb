@@ -23,22 +23,22 @@
 <h3 align = "right">Total: <%= number_to_currency(cart.total)%></h3>
 <center>
   <h2>Shipping Info:</h2>
-  <%= form_tag "/orders", method: :create do %>
-    <%= label_tag :name %>
-    <%= text_field_tag :name, "#{@user.name}" %>
+  <%= form_for(@order, url: "/profile/orders") do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
 
-    <%= label_tag :address %>
-    <%= text_field_tag :address, "#{@user.address}" %>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
 
-    <%= label_tag :city %>
-    <%= text_field_tag :city, "#{@user.city}" %>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
 
-    <%= label_tag :state %>
-    <%= text_field_tag :state, "#{@user.state}" %>
+    <%= f.label :state %>
+    <%= f.text_field :state %>
 
-    <%= label_tag :zip %>
-    <%= number_field_tag :zip, "#{@user.zipcode}" %>
+    <%= f.label :zip %>
+    <%= f.number_field :zip %>
 
-    <%= submit_tag 'Create Order' %>
+    <%= f.submit %>
   <% end %>
 </center>

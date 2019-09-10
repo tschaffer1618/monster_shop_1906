@@ -63,11 +63,11 @@ RSpec.describe("New Order Page") do
       visit "/cart"
       click_on "Checkout"
 
-      expect(page).to have_field(:name)
-      expect(page).to have_field(:address)
-      expect(page).to have_field(:city)
-      expect(page).to have_field(:state)
-      expect(page).to have_field(:zip)
+      expect(page).to have_field("Name")
+      expect(page).to have_field("Address")
+      expect(page).to have_field("City")
+      expect(page).to have_field("State")
+      expect(page).to have_field("Zip")
       expect(page).to have_button("Create Order")
     end
   end

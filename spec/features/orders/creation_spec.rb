@@ -39,11 +39,11 @@ RSpec.describe("Order Creation") do
       state = "New York"
       zip = 10001
 
-      fill_in :name, with: name
-      fill_in :address, with: address
-      fill_in :city, with: city
-      fill_in :state, with: state
-      fill_in :zip, with: zip
+      fill_in "Name", with: name
+      fill_in "Address", with: address
+      fill_in "City", with: city
+      fill_in "State", with: state
+      fill_in "Zip", with: zip
 
       click_button "Create Order"
 
@@ -100,11 +100,11 @@ RSpec.describe("Order Creation") do
       state = "New York"
       zip = 10001
 
-      fill_in :name, with: name
-      fill_in :address, with: address
-      fill_in :city, with: city
-      fill_in :state, with: state
-      fill_in :zip, with: zip
+      fill_in "Name", with: name
+      fill_in "Address", with: address
+      fill_in "City", with: city
+      fill_in "State", with: state
+      fill_in "Zip", with: zip
 
       click_button "Create Order"
 
