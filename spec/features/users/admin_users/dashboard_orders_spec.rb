@@ -87,13 +87,6 @@ RSpec.describe "Admin Dashboard page" do
     end
   end
 
-#As an admin user
-# When I log into my dashboard, "/admin/dashboard"
-# Then I see any "packaged" orders ready to ship.
-# Next to each order I see a button to "ship" the order.
-# When I click that button for an order, the status of that order changes to "shipped"
-# And the user can no
-
   it 'packaged orders have a button to ship' do
 
     visit admin_path
@@ -112,22 +105,6 @@ RSpec.describe "Admin Dashboard page" do
       expect(page).to have_content("cancelled")
       expect(page).not_to have_link("Ship Item")
       expect(page).to have_content("No Action Available")
-    end
-  end
-
-  it 'clicking Ship Item link changes status to shipped' do
-
-    visit admin_path
-
-    within "#orders-#{@order_2.id}-3" do
-      click_link("Ship Item")
-    end
-
-    expect(current_path).to eq(admin_path)
-
-    within "#orders-#{@order_2.id}-4" do
-      expect(page).to have_content("shipped")
-      expect(page).not_to have_link("Ship Item")
     end
   end
 end
