@@ -182,3 +182,9 @@ input[type="number"] {
   display: block;
   margin: auto;
 }
+
+#login-form {
+  width: 50%;
+  display: block;
+  margin: auto;
+}
