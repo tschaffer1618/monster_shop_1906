@@ -22,13 +22,13 @@ RSpec.describe "Merchant Items Page" do
 
         click_link("Add New Item")
 
-        expect(current_path).to eq(new_merchant_item_path(@shop))
+        expect(current_path).to eq(new_merchant_user_path)
       end
 
       describe "When I submit valid information" do
         describe "I am taken back to my items page and see a success flash message" do
           it "I see the new item on the page, and it is enabled and available for sale" do
-            visit new_merchant_item_path(@shop)
+            visit new_merchant_user_path
 
             name = "Chamois Buttr"
             price = 18
@@ -36,11 +36,11 @@ RSpec.describe "Merchant Items Page" do
             image_url = "https://images-na.ssl-images-amazon.com/images/I/51HMpDXItgL._SX569_.jpg"
             inventory = 25
 
-            fill_in :name, with: name
-            fill_in :price, with: price
-            fill_in :description, with: description
-            fill_in :image, with: image_url
-            fill_in :inventory, with: inventory
+            fill_in "Name", with: name
+            fill_in "Price", with: price
+            fill_in "Description", with: description
+            fill_in "Image", with: image_url
+            fill_in "Inventory", with: inventory
 
             click_button "Create Item"
 
@@ -58,11 +58,11 @@ RSpec.describe "Merchant Items Page" do
 
       describe "When I submit invalid information" do
         it "I see an error flash message for certain fields" do
-          visit new_merchant_item_path(@shop)
+          visit new_merchant_user_path
 
-          fill_in :price, with: -5
-          fill_in :image, with: ""
-          fill_in :inventory, with: -5
+          fill_in "Price", with: -5
+          fill_in "Image", with: ""
+          fill_in "Inventory", with: -5
 
           click_button "Create Item"
 
@@ -76,18 +76,18 @@ RSpec.describe "Merchant Items Page" do
 
       describe "If I left the image field blank" do
         it "I see a placeholder image for the thumbnail" do
-          visit new_merchant_item_path(@shop)
+          visit new_merchant_user_path
 
           name = "Chamois Buttr"
           price = 18
           description = "No more chaffin'!"
           inventory = 25
 
-          fill_in :name, with: name
-          fill_in :price, with: price
-          fill_in :description, with: description
-          fill_in :image, with: ""
-          fill_in :inventory, with: inventory
+          fill_in "Name", with: name
+          fill_in "Price", with: price
+          fill_in "Description", with: description
+          fill_in "Image", with: ""
+          fill_in "Inventory", with: inventory
 
           click_button "Create Item"
 
