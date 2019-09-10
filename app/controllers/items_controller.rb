@@ -1,6 +1,4 @@
 class ItemsController<ApplicationController
-  before_action :current_merchant_employee?, :current_merchant_admin?, only: [:create]
-
   def index
     if params[:merchant_id]
       @merchant = Merchant.find(params[:merchant_id])
@@ -12,27 +10,6 @@ class ItemsController<ApplicationController
 
   def show
     @item = Item.find(params[:id])
-  end
-
-  def new
-    @merchant = Merchant.find(params[:merchant_id])
-  end
-
-  def create
-    @merchant = current_user.merchant
-    item = @merchant.items.create(item_params)
-
-    if item.image.blank?
-      item.image = "https://avatars3.githubusercontent.com/u/6475745?s=88&v=4"
-    end
-    
-    if item.save
-      flash[:new_item] = "Your new item is saved!"
-      redirect_to merchant_user_index_path
-    else
-      flash[:error] = item.errors.full_messages.to_sentence
-      render :new
-    end
   end
 
   def edit

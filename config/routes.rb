@@ -9,14 +9,12 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get "/", to: "dashboard#index", as: :user
-    # get "/orders", to: "dashboard#index", as: :orders_show
-    # get "/orders", to: "dashboard#show", as: :orders_show
-    resources :orders, only: [:show]
-    resources :items, only: [:index, :destroy], as: :user
+    get "/orders/:id", to: "dashboard#show", as: :orders_show
+    resources :items, only: [:index, :new, :create, :destroy], as: :user
   end
 
   resources :merchants do
-    resources :items, only: [:index, :new, :create]
+    resources :items, only: [:index]
   end
 
   resources :items, except: [:new, :create] do
