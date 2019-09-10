@@ -19,7 +19,7 @@
         <td><%= order.created_at%></td>
         <td><%= order.status %></td>
         <% if order.status == "packaged" %>
-          <td><%= link_to "Ship Item", orders_status_update_path(order) %></td>
+          <td><%= link_to "Ship Item", "orders/#{order.id}/update_status" %> </td>
         <% else %>
           <td> No Action Available </td>
         <% end %>

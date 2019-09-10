@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   patch "/merchant/:order_id/:item_order_id/fulfill", to: "merchant/orders#fulfill"
   patch "/merchants/:id/update_status", to: "merchants#update_status"
 
-  patch "/orders/:order_id/update_status", to: "orders#update_status", as: :orders_status_update
+  patch "/orders/:order_id/update_status", to: "orders#update_status"
 
   get "/register", to: "users#new"
   post "/register", to: "users#create"
