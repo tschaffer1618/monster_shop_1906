@@ -48,7 +48,6 @@ RSpec.describe "Admin Dashboard page" do
 
     it 'can show all orders' do
       visit admin_path
-      save_and_open_page
 
       within "#orders-#{@order_1.id}" do
         expect(page).to have_content(@regular_user_1.name)
