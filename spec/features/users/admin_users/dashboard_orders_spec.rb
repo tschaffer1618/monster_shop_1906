@@ -60,27 +60,35 @@ RSpec.describe "Admin Dashboard page" do
         expect(page).to have_content(@regular_user_1.name)
         expect(page).to have_content(@order_1.id)
         expect(page).to have_content(@order_1.created_at)
+        expect(page).to have_content(@order_1.status)
       end
 
       within "#orders-#{@order_2.id}" do
         expect(page).to have_content(@regular_user_2.name)
         expect(page).to have_content(@order_2.id)
         expect(page).to have_content(@order_2.created_at)
+        expect(page).to have_content(@order_2.status)
       end
 
       within "#orders-#{@order_3.id}" do
         expect(page).to have_content(@regular_user_2.name)
         expect(page).to have_content(@order_3.id)
         expect(page).to have_content(@order_3.created_at)
+        expect(page).to have_content(@order_3.status)
       end
 
       within "#orders-#{@order_4.id}" do
         expect(page).to have_content(@regular_user_1.name)
         expect(page).to have_content(@order_4.id)
         expect(page).to have_content(@order_4.created_at)
+        expect(page).to have_content(@order_4.status)
       end
     end
 
     it 'displys orders sorted by status' do
+    #  - packaged
+      # - pending
+      # - shipped
+      # - cancelled
   end
 end
