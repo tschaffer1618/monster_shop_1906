@@ -15,10 +15,6 @@ class OrdersController <ApplicationController
     redirect_to "/profile"
   end
 
-  def show
-    @order = Order.find(params[:id])
-  end
-
   def create
     @user = current_user
     @order = Order.create(order_params)
