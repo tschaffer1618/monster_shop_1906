@@ -1,6 +1,7 @@
 class Merchant::ItemsController < Merchant::BaseController
   def index
-    @items = Item.where(merchant_id: current_user.merchant_id)
+    @merchant = current_user.merchant
+    @items = current_user.merchant.items    
   end
 
   def destroy
