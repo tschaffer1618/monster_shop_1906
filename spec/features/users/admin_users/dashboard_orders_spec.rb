@@ -29,17 +29,18 @@ RSpec.describe "Admin Dashboard page" do
       @item_order_6 = @regular_user_1.item_orders.create(order: @order_4, item: @item_5, quantity: 15, price: @item_5.price, user: @regular_user_1, fulfilled?: true)
 
     @order_5 = create(:order, name: "Sam", status: 1)
-      @item_order_7 = @regular_user_1.item_orders.create(order: @order_5, item: @item_1, quantity: 15, price: @item_1.price, user: @regular_user_1, fulfilled?: true)
+      @item_order_7 = @regular_user_1.item_orders.create(order: @order_5, item: @item_1, quantity: 15, price: @item_1.price, user: @regular_user_1, fulfilled?: false)
 
     @order_6 = create(:order, name: "Jim", status: 0)
       @item_order_8 = @regular_user_2.item_orders.create(order: @order_6, item: @item_3, quantity: 10, price: @item_3.price, user: @regular_user_1, fulfilled?: true)
 
     @admin_1 = create(:user, name: "Admin 1", role: 3)
 
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
+
   end
 
   it 'can show all orders sorted by status' do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
 
     visit admin_path
 
@@ -87,6 +88,7 @@ RSpec.describe "Admin Dashboard page" do
   end
 
   it 'packaged orders have a button to ship' do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
 
     visit admin_path
 
@@ -107,6 +109,8 @@ RSpec.describe "Admin Dashboard page" do
     end
   end
   it 'click the Ship Item button updates the status' do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
+
     visit admin_path
 
     within "#orders-#{@order_2.id}-1" do
@@ -124,5 +128,13 @@ RSpec.describe "Admin Dashboard page" do
       expect(page).to have_content("shipped")
       expect(page).to_not have_content("pending")
     end
+  end
+
+  xit 'user cannot cancel order once shipped' do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@regular_user_1)
+
+    visit order_path(@order_2)
+
+    expect(page).to_not have_button("Cancel Order")
   end
 end
