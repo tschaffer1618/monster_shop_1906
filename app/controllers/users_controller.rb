@@ -57,8 +57,6 @@ class UsersController< ApplicationController
   def show_orders
     @user = current_user
     @item_orders = @user.item_orders
-    session.delete(:cart)
-    flash[:order] = "Your order has been created!"
   end
 
   private

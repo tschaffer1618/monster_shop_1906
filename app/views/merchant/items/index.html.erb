@@ -13,6 +13,7 @@
           <th scope="col">Price</th>
           <th scope="col">Quantity</th>
           <th scope="col">Active?</th>
+          <th scope="col"></th>
         </tr>
       </thead>
 
@@ -21,12 +22,15 @@
           <section id='item-<%= item.id %>'>
               <tr>
                 <td><%= item.name %> </td>
-                  <td><%= item.id %></td>
+                  <td>#<%= item.id %></td>
                 <td><img id='thumbnail-<%= item.id %>'><%= image_tag item.image, class: 'img_thumbnail' %></img></td>
                 <td><%= item.description %></td>
                 <td><%= number_to_currency(item.price) %></td>
                 <td><%= item.inventory %></td>
                 <td><%= item.active? %></td>
+                <% if item.no_orders? %>
+                  <td><%= link_to "Delete", "/merchant/items/#{item.id}", method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger item-buttons" %></td>
+                <% end %>
               </tr>
           </section>
         <% end %>

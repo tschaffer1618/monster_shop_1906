@@ -1,5 +1,5 @@
 class AddStatusToItemOrders < ActiveRecord::Migration[5.1]
   def change
-    add_column :item_orders, :status, :string, :default => "pending"
+    add_column :item_orders, :fulfilled?, :boolean, :default => false
   end
 end

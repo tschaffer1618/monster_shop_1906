@@ -1,7 +1,7 @@
 <h1> Welcome, <%= @merchant_user.name %>!</h1>
 <br>
 <center>
-  <h3><%= @merchant.name %></h3>
+  <h3><%= link_to @merchant.name, "/merchants/#{@merchant.id}" %></h3>
   <h3><%= @merchant.address %></h3>
   <h3><%= "#{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></h3>
 </center>
@@ -20,7 +20,7 @@
       <% @pending_orders.each do |order|%>
         <tr>
         <section id = "order-<%=order.id%>">
-            <td><p> <%=link_to "Order ##{order.id}", merchant_orders_show_path(order) %></p></td>
+            <td><p> <%=link_to "Order ##{order.id}", merchant_order_path(order) %></p></td>
             <td><p><%= order.created_at.strftime('%D')%></p></td>
             <td><p><%= order.total_items%></p></td>
             <td><p><%= number_to_currency(order.grandtotal) %></p></td>
