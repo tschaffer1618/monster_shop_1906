@@ -1,20 +1,23 @@
 class ReviewsController<ApplicationController
+  before_action :set_item
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def new
-    @item = Item.find(params[:item_id])
+    @review = @item.reviews.new
   end
 
   def create
     if field_empty?
-      item = Item.find(params[:item_id])
       flash[:error] = "Please fill in all fields in order to create a review."
-      redirect_to "/items/#{item.id}/reviews/new"
+      redirect_to new_item_review_path(@item)
     else
-      @item = Item.find(params[:item_id])
-      review = @item.reviews.create(review_params)
-      if review.save
+      @review = @item.reviews.create(review_params)
+      if @review.save
         flash[:success] = "Review successfully created"
-        redirect_to "/items/#{@item.id}"
+        redirect_to item_path(@item)
       else
         flash[:error] = "Rating must be between 1 and 5"
         render :new
@@ -23,26 +26,30 @@ class ReviewsController<ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
+    @review = @item.reviews.find(params[:id])
   end
 
   def update
-    review = Review.find(params[:id])
-    review.update(review_params)
-    redirect_to "/items/#{review.item.id}"
+    @review = @item.reviews.find(params[:id])
+    @review.update(review_params)
+    redirect_to item_path(@item)
   end
 
   def destroy
-    review = Review.find(params[:id])
+    review = @item.reviews.find(params[:id])
     item = review.item
     review.destroy
-    redirect_to "/items/#{item.id}"
+    redirect_to item_path(@item)
   end
 
   private
 
   def review_params
-    params.permit(:title,:content,:rating)
+    if params[:review]
+      params.require(:review).permit(:title,:content,:rating)
+    else
+      params.permit(:title,:content,:rating)
+    end
   end
 
   def field_empty?

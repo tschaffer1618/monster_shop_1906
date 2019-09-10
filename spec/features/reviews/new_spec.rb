@@ -25,9 +25,9 @@ RSpec.describe 'review creation', type: :feature do
 
         click_on "Add Review"
 
-        fill_in :title, with: title
-        fill_in :content, with: content
-        fill_in :rating, with: rating
+        fill_in "Title", with: title
+        fill_in "Content", with: content
+        fill_in "Rating", with: rating
 
         click_button "Create Review"
 
@@ -51,8 +51,8 @@ RSpec.describe 'review creation', type: :feature do
 
         click_on "Add Review"
 
-        fill_in :title, with: title
-        fill_in :rating, with: rating
+        fill_in "Title", with: title
+        fill_in "Rating", with: rating
 
         click_on "Create Review"
 
@@ -69,9 +69,9 @@ RSpec.describe 'review creation', type: :feature do
 
         click_on "Add Review"
 
-        fill_in :title, with: title
-        fill_in :content, with: content
-        fill_in :rating, with: rating
+        fill_in "Title", with: title
+        fill_in "Content", with: content
+        fill_in "Rating", with: rating
 
         click_on "Create Review"
 

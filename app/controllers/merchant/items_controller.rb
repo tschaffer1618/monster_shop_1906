@@ -1,6 +1,6 @@
 class Merchant::ItemsController < Merchant::BaseController
   before_action :current_merchant_admin?
-  before_action :set_merchant, only: [:index, :new, :create]
+  before_action :set_merchant, only: [:index, :new, :create, :destroy]
 
   def set_merchant
     @merchant = current_user.merchant
@@ -27,6 +27,14 @@ class Merchant::ItemsController < Merchant::BaseController
       flash[:error] = @item.errors.full_messages.to_sentence
       render :new
     end
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    @merchant.items.delete(item)
+    item.destroy    
+    flash[:delete_item_warning] = "#{item.name} is now deleted!"
+    redirect_to merchant_user_index_path
   end
 
   private
