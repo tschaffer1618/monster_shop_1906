@@ -16,7 +16,8 @@
 
 RSpec.describe "Admin Dashboard page" do
   before :each do
-    @regular_user_1 = create(:user, name: "Regular User")
+    @regular_user_1 = create(:user, name: "Regular User 1")
+    @regular_user_2 = create(:user, name: "Regular User 2")
 
     @merchant_shop_1 = create(:merchant, name: "Merchant Shop 1")
       @item_1 = @merchant_shop_1.items.create!(attributes_for(:item, name: "Item 1", inventory: 10))
@@ -33,21 +34,21 @@ RSpec.describe "Admin Dashboard page" do
       @item_order_3 = @regular_user_1.item_orders.create!(order: @order_1, item: @item_3, quantity: 10, price: @item_3.price, user: @regular_user_1, fulfilled?: false)
 
     @order_2 = create(:order, name: "Amy", status: "cancelled")
-      @item_order_4 = @regular_user_1.item_orders.create(order: @order_2, item: @item_2, quantity: 100, price: @item_2.price, user: @regular_user_1, fulfilled?: true)
+      @item_order_4 = @regular_user_2.item_orders.create(order: @order_2, item: @item_2, quantity: 100, price: @item_2.price, user: @regular_user_1, fulfilled?: true)
 
     @order_3 = create(:order, name: "Beth", status: "shipped")
-      @item_order_5 = @regular_user_1.item_orders.create(order: @order_3, item: @item_4, quantity: 18, price: @item_4.price, user: @regular_user_1, fulfilled?: true)
+      @item_order_5 = @regular_user_2.item_orders.create(order: @order_3, item: @item_4, quantity: 18, price: @item_4.price, user: @regular_user_1, fulfilled?: true)
 
-    @order_4 = create(:order, name: "Adam" status: "packaged")
+    @order_4 = create(:order, name: "Adam", status: "packaged")
       @item_order_6 = @regular_user_1.item_orders.create(order: @order_4, item: @item_5, quantity: 15, price: @item_5.price, user: @regular_user_1, fulfilled?: true)
 
-    @order_5 = create(:order, name: "Sam" status: "packaged")
+    @order_5 = create(:order, name: "Sam", status: "packaged")
       @item_order_7 = @regular_user_1.item_orders.create(order: @order_5, item: @item_1, quantity: 15, price: @item_1.price, user: @regular_user_1, fulfilled?: true)
 
-    @order_6 = create(:order, name: "Sam" status: "pending")
-      @item_order_8 = @regular_user_1.item_orders.create(order: @order_6, item: @item_3, quantity: 10, price: @item_3.price, user: @regular_user_1, fulfilled?: true)
+    @order_6 = create(:order, name: "Jim", status: "pending")
+      @item_order_8 = @regular_user_2.item_orders.create(order: @order_6, item: @item_3, quantity: 10, price: @item_3.price, user: @regular_user_1, fulfilled?: true)
 
-    @admin_1 = create(:user, role: 3)
+    @admin_1 = create(:user, name: "Admin 1", role: 3)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
   end
@@ -62,13 +63,13 @@ RSpec.describe "Admin Dashboard page" do
       end
 
       within "#orders-#{@order_2.id}" do
-        expect(page).to have_content(@regular_user_1.name)
+        expect(page).to have_content(@regular_user_2.name)
         expect(page).to have_content(@order_2.id)
         expect(page).to have_content(@order_2.created_at)
       end
 
       within "#orders-#{@order_3.id}" do
-        expect(page).to have_content(@regular_user_1.name)
+        expect(page).to have_content(@regular_user_2.name)
         expect(page).to have_content(@order_3.id)
         expect(page).to have_content(@order_3.created_at)
       end
