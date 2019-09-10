@@ -9,7 +9,6 @@ class OrdersController <ApplicationController
     order.item_orders.each do |item_order|
       item_order.fulfilled? = false
       item = Item.find(item_order.item_id)
-      item.increase_inventory(item_order)
       item_order.item.increase_inventory(item_order)
       item.save
     end
