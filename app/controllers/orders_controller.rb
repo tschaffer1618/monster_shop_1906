@@ -7,7 +7,7 @@ class OrdersController <ApplicationController
   def cancel
     order = Order.find(params[:id])
     order.item_orders.each do |item_order|
-      item_order.fulfilled? == false
+      item_order.fulfilled? = false
       item = Item.find(item_order.item_id)
       item.increase_inventory(item_order)
       item_order.item.increase_inventory(item_order)
