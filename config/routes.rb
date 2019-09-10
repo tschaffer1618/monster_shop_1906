@@ -27,12 +27,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "/", to: "dashboard#index"
+    patch "/orders/:order_id/update_status", to: "dashboard#update_status"
+
     resources :users, only: [:index, :show]
     resources :merchants, only: [:show]
   end
 
   patch "/merchant/:order_id/:item_order_id/fulfill", to: "merchant/orders#fulfill"
-
   patch "/merchants/:id/update_status", to: "merchants#update_status"
 
   get "/register", to: "users#new"
