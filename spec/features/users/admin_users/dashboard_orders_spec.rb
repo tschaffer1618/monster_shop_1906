@@ -133,7 +133,7 @@ RSpec.describe "Admin Dashboard page" do
   it 'user cannot cancel order once shipped' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@regular_user_1)
 
-    visit order_path(@order_2)
+    visit "/profile/orders/#{@order_2.id}"
 
     expect(page).to_not have_button("Cancel Order")
   end
