@@ -34,7 +34,7 @@
   <% @order.item_orders.each do |item_order|%>
     <tr>
     <section id = "item-<%=item_order.item_id%>">
-        <td><p><% if item_order.fulfilled? == true %></p></td>
+        <td><p><% if item_order.fulfilled? %></p></td>
             <td><p>"Fulfilled"</p></td>
         <td><p><% else %></p></td>
             <td><p>"Unfulfilled"</p></td>

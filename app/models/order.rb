@@ -1,10 +1,12 @@
 class Order <ApplicationRecord
   validates_presence_of :name, :address, :city, :state, :zip, :status
-  validates :status, inclusion: {:in => ['pending', 'packaged', 'shipped', 'cancelled']}
 
   has_many :item_orders
   has_many :items, through: :item_orders
   has_many :merchants, through: :item
+  has_many :users, through: :item_orders
+
+  enum status: [:packaged, :pending, :shipped, :cancelled]
 
   def grandtotal
     item_orders.sum('price * quantity')
@@ -26,5 +28,5 @@ class Order <ApplicationRecord
    self.update(status: 'packaged') if item_orders.all? { |item_order| item_order.fulfilled?}
    self.save
   end
-
+  
 end

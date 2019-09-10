@@ -7,9 +7,8 @@ class OrdersController <ApplicationController
   def cancel
     order = Order.find(params[:id])
     order.item_orders.each do |item_order|
-      item_order.fulfilled? == false
+      item_order.update(fulfilled?: false)
       item = Item.find(item_order.item_id)
-      item.increase_inventory(item_order)
       item_order.item.increase_inventory(item_order)
       item.save
     end
@@ -45,7 +44,6 @@ class OrdersController <ApplicationController
   end
 
   private
-
   def order_params
     params.permit(:name, :address, :city, :state, :zip)
   end
