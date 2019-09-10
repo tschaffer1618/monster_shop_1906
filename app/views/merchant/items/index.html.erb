@@ -23,7 +23,7 @@
               <tr>
                 <td><%= item.name %> </td>
                   <td>#<%= item.id %></td>
-                <td><img id='thumbnail-<%= item.id %>'><%= image_tag item.image, class: 'img_thumbnail' %></img></td>
+                <td><img id='thumbnail-<%= item.id %>'><%= image_tag item.image, onerror: 'this.error=null;this.src="https://avatars3.githubusercontent.com/u/6475745?s=88&v=4"', class: 'img_thumbnail' %></img></td>
                 <td><%= item.description %></td>
                 <td><%= number_to_currency(item.price) %></td>
                 <td><%= item.inventory %></td>
