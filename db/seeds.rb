@@ -10,7 +10,6 @@ User.destroy_all
 Item.destroy_all
 Merchant.destroy_all
 
-#merchants
 bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
 dunder = Merchant.create(name: "Dunder Mifflin Paper Co", address: '1725 Slough Ave.', city: 'Scranton', state: 'PA', zip: 18501)
@@ -70,10 +69,10 @@ admin_user = User.create!(name: "Leslie Knope",
               password: "Waffles",
               role: 3)
 
-order_1 = Order.create!(name: "Beth", address: "123 Happy St", city: "Denver", state: "CO", zip: "80205")
-  item_order_1 = ItemOrder.create!(order: order_1, item: tire, quantity: 2, price: tire.price, user: regular_user_1)
-  item_order_2 = ItemOrder.create!(order: order_1, item: bike, quantity: 5, price: bike.price, user: regular_user_1)
-  item_order_3 = ItemOrder.create!(order: order_1, item: watch, quantity: 5, price: watch.price, user: regular_user_1)
+order_1 = Order.create!(name: "Beth", address: "123 Happy St", city: "Denver", state: "CO", zip: "80205", status: 0)
+  item_order_1 = ItemOrder.create!(order: order_1, item: tire, quantity: 2, price: tire.price, user: regular_user_1, fulfilled?: 0)
+  item_order_2 = ItemOrder.create!(order: order_1, item: bike, quantity: 5, price: bike.price, user: regular_user_1, fulfilled?: 0)
+  item_order_3 = ItemOrder.create!(order: order_1, item: watch, quantity: 5, price: watch.price, user: regular_user_1, fulfilled?: 0)
 
 order_2 = Order.create(name: "John", address: "123 West St", city: "Golden", state: "CO", zip: "56600")
   item_order_4 = ItemOrder.create(order: order_2, item: bike, quantity: 12, price: bike.price, user: regular_user_2)
@@ -87,5 +86,5 @@ order_3 = Order.create(name: "Amber", address: "123 East St", city: "Denver", st
   item_order_9 = ItemOrder.create(order: order_3, item: bike, quantity: 1, price: bike.price, user: regular_user_1)
 
 order_4 = Order.create(name: "Matt", address: "123 North St", city: "Chicago", state: "IL", zip: "60701")
-  item_order_10 = ItemOrder.create(order: order_3, item: pull_toy, quantity: 4, price: pull_toy.price, user: regular_user_2)
-  item_order_11 = ItemOrder.create(order: order_3, item: dog_bone, quantity: 3, price: dog_bone.price * 3, user: regular_user_2)
+  item_order_10 = ItemOrder.create(order: order_4, item: pull_toy, quantity: 4, price: pull_toy.price, user: regular_user_2)
+  item_order_11 = ItemOrder.create(order: order_4, item: dog_bone, quantity: 3, price: dog_bone.price * 3, user: regular_user_2)
