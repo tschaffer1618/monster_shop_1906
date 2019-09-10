@@ -1,4 +1,4 @@
-
+require 'rails_helper'
 
 RSpec.describe "Admin Dashboard page" do
   before :each do
@@ -40,50 +40,94 @@ RSpec.describe "Admin Dashboard page" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
   end
 
-    it 'can show all orders sorted by status' do
+  it 'can show all orders sorted by status' do
 
-      visit admin_path
+    visit admin_path
 
-      within "#orders-#{@order_1.id}-1" do
-        expect(page).to have_content(@regular_user_1.name)
-        expect(page).to have_content(@order_1.id)
-        expect(page).to have_content(@order_1.created_at)
-        expect(page).to have_content("pending")
-      end
+    within "#orders-#{@order_1.id}-1" do
+      expect(page).to have_content(@regular_user_1.name)
+      expect(page).to have_content(@order_1.id)
+      expect(page).to have_content(@order_1.created_at)
+      expect(page).to have_content("pending")
+    end
 
-      within "#orders-#{@order_5.id}-2" do
-        expect(page).to have_content(@regular_user_1.name)
-        expect(page).to have_content(@order_5.id)
-        expect(page).to have_content(@order_5.created_at)
-        expect(page).to have_content("pending")
-      end
+    within "#orders-#{@order_5.id}-2" do
+      expect(page).to have_content(@regular_user_1.name)
+      expect(page).to have_content(@order_5.id)
+      expect(page).to have_content(@order_5.created_at)
+      expect(page).to have_content("pending")
+    end
 
-      within "#orders-#{@order_2.id}-3" do
-        expect(page).to have_content(@regular_user_2.name)
-        expect(page).to have_content(@order_2.id)
-        expect(page).to have_content(@order_2.created_at)
-        expect(page).to have_content("packaged")
-      end
+    within "#orders-#{@order_2.id}-3" do
+      expect(page).to have_content(@regular_user_2.name)
+      expect(page).to have_content(@order_2.id)
+      expect(page).to have_content(@order_2.created_at)
+      expect(page).to have_content("packaged")
+    end
 
-      within "#orders-#{@order_6.id}-4" do
-        expect(page).to have_content(@regular_user_2.name)
-        expect(page).to have_content(@order_6.id)
-        expect(page).to have_content(@order_6.created_at)
-        expect(page).to have_content("packaged")
-      end
+    within "#orders-#{@order_6.id}-4" do
+      expect(page).to have_content(@regular_user_2.name)
+      expect(page).to have_content(@order_6.id)
+      expect(page).to have_content(@order_6.created_at)
+      expect(page).to have_content("packaged")
+    end
 
-      within "#orders-#{@order_3.id}-5" do
-        expect(page).to have_content(@regular_user_2.name)
-        expect(page).to have_content(@order_3.id)
-        expect(page).to have_content(@order_3.created_at)
-        expect(page).to have_content("shipped")
-      end
+    within "#orders-#{@order_3.id}-5" do
+      expect(page).to have_content(@regular_user_2.name)
+      expect(page).to have_content(@order_3.id)
+      expect(page).to have_content(@order_3.created_at)
+      expect(page).to have_content("shipped")
+    end
 
-      within "#orders-#{@order_4.id}-6" do
-        expect(page).to have_content(@regular_user_1.name)
-        expect(page).to have_content(@order_4.id)
-        expect(page).to have_content(@order_4.created_at)
-        expect(page).to have_content("cancelled")
-      end
+    within "#orders-#{@order_4.id}-6" do
+      expect(page).to have_content(@regular_user_1.name)
+      expect(page).to have_content(@order_4.id)
+      expect(page).to have_content(@order_4.created_at)
+      expect(page).to have_content("cancelled")
     end
   end
+
+#As an admin user
+# When I log into my dashboard, "/admin/dashboard"
+# Then I see any "packaged" orders ready to ship.
+# Next to each order I see a button to "ship" the order.
+# When I click that button for an order, the status of that order changes to "shipped"
+# And the user can no
+
+  it 'packaged orders have a button to ship' do
+
+    visit admin_path
+
+    within "#orders-#{@order_2.id}-3" do
+      expect(page).to have_content("packaged")
+      expect(page).to have_link("Ship Item")
+    end
+
+    within "#orders-#{@order_6.id}-4" do
+      expect(page).to have_content("packaged")
+      expect(page).to have_link("Ship Item")
+    end
+
+    within "#orders-#{@order_4.id}-6" do
+      expect(page).to have_content("cancelled")
+      expect(page).not_to have_link("Ship Item")
+      expect(page).to have_content("No Action Available")
+    end
+  end
+
+  it 'clicking Ship Item link changes status to shipped' do
+
+    visit admin_path
+
+    within "#orders-#{@order_2.id}-3" do
+      click_link("Ship Item")
+    end
+
+    expect(current_path).to eq(admin_path)
+
+    within "#orders-#{@order_2.id}-4" do
+      expect(page).to have_content("shipped")
+      expect(page).not_to have_link("Ship Item")
+    end
+  end
+end
