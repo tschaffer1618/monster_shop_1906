@@ -1,6 +1,5 @@
 class Order <ApplicationRecord
   validates_presence_of :name, :address, :city, :state, :zip, :status
-  #validates :status, inclusion: {:in => ['pending', 'packaged', 'shipped', 'cancelled']}
 
   has_many :item_orders
   has_many :items, through: :item_orders
@@ -23,19 +22,5 @@ class Order <ApplicationRecord
     #{self.city}, #{self.state}
     #{self.zip}
     "
-  end
-
-  # def find_user_name
-  #   find_user.name
-  # end
-  #
-  # def find_user
-  #   user_id = self.item_orders.distinct.pluck(:user_id).join
-  #   user = User.find(user_id)
-  # end
-
-  def by_status
-    binding.pry
-    self.group_by(:status)
   end
 end
