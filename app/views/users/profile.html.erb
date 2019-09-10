@@ -1,20 +1,30 @@
 
 <div class="jumbotron">
   <section id="user-info-<%=@user.id %>">
-  <h1 class="display-4">Hello, <%= @user.name %>!</h1>
-    <p class="lead">Address: <%= @user.address %></p>
-    <p class="lead">City: <%= @user.city %></p>
-    <p class="lead">State: <%= @user.state %></p>
-    <p class="lead">Zipcode: <%= @user.zipcode %></p>
-    <p class="lead">Email: <%= @user.email %></p>
+    <h1 class="display-4">Hello, <%= @user.name %>!</h1>
+    <br>
+    <center>
+      <p class="lead">Address: <%= @user.address %></p>
+      <p class="lead">City: <%= @user.city %></p>
+      <p class="lead">State: <%= @user.state %></p>
+      <p class="lead">Zipcode: <%= @user.zipcode %></p>
+      <p class="lead">Email: <%= @user.email %></p>
+    </center>
   </section>
 
+
+<br>
+<center>
   <section id= "user-profile-actions">
-    <%= link_to "Edit Password", "profile/edit_password" %>
-    <p class="lead">
-       <%= link_to "Edit Profile", "profile/edit" %>
-    </p>
+    <%= link_to "Edit Password", "profile/edit_password", class: "btn btn-success" %>
+
+    <%= link_to "Edit Profile", "profile/edit", class: "lead btn btn-info" %>
+
+    <%= link_to "My Orders", "/profile/orders", class: "btn btn-secondary" %>
   </section>
 
-  <%= link_to "My Orders", "/profile/orders" %>
+
+
+</center>
+
 </div>
