@@ -13,7 +13,7 @@
   <% @orders.each do |order|%>
   <section id= "orders-<%=order.id%>">
       <tr>
-        <td><%=link_to order.find_user_name, profile_path%></td>
+        <td><%=link_to order.users.first.name, profile_path%></td>
         <td><%= order.id %></td>
         <td><%= order.created_at%></td>
         <td><%= order.status %></td>
