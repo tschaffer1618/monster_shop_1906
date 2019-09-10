@@ -42,9 +42,6 @@ class MerchantsController <ApplicationController
     if current_admin? && @merchant.no_orders?
       @merchant.destroy
       redirect_to merchants_path
-    else
-      flash[:warning] = "This merchant cannot be deleted at this moment"
-      redirect_to merchants_path
     end
   end
 
