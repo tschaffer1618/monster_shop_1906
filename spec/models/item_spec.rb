@@ -64,5 +64,10 @@ describe Item, type: :model do
       @chain.decrease_inventory(@item_order_1)
       expect(@chain.inventory).to eq(3)
     end
+
+    it "can increase inventory" do
+      @chain.increase_inventory(@item_order_1)
+      expect(@chain.inventory).to eq(7)
+    end
   end
 end
