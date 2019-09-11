@@ -24,8 +24,55 @@ pull_toy = dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!
 dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
 
 #dunder items
-ream = dunder.items.create(name: "Ream of Paper", description: "So much paper!", price: 8, image: "https://dundermifflinpaper.com/wp-content/uploads/2013/06/20190824_185517.jpg", inventory: 174)
+ream = dunder.items.create(name: "Ream of Paper", description: "So much paper!", price: 8, image: "https://dundermifflinpaper.com/wp-This is content for review/uploads/2013/06/20190824_185517.jpg", inventory: 174)
 dundie = dunder.items.create(name: "Dundie Award", description: "Everyone wants one!", price: 16, image: "https://images-na.ssl-images-amazon.com/images/I/712t-j2WvwL._UX679_.jpg", inventory: 12)
+
+#tire_reviews
+review_1 = tire.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 1)
+review_2 = tire.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 2)
+review_3 = tire.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 3)
+review_4 = tire.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 1)
+review_5 = tire.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 2)
+review_6 = tire.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 3)
+
+#bike_reviews
+review_7 = bike.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 1)
+review_8 = bike.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 4)
+review_9 = bike.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 5)
+review_10 = bike.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 1)
+review_11 = bike.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 1)
+review_12 = bike.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 1)
+
+#pull_toy_reviews
+review_13 = pull_toy.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 5)
+review_14 = pull_toy.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 2)
+review_15 = pull_toy.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 5)
+review_16 = pull_toy.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 4)
+review_17 = pull_toy.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 5)
+review_18 = pull_toy.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 5)
+
+#bone_reviews
+review_19 = dog_bone.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 5)
+review_20 = dog_bone.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 4)
+review_21 = dog_bone.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 1)
+review_22 = dog_bone.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 3)
+review_23 = dog_bone.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 5)
+review_24 = dog_bone.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 5)
+
+#ream_reviews
+review_25 = ream.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 3)
+review_26 = ream.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 3)
+review_27 = ream.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 3)
+review_28 = ream.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 2)
+review_29 = ream.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 2)
+review_30 = ream.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 2)
+
+#dundie_reviews
+review_31 = dundie.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 3)
+review_32 = dundie.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 3)
+review_33 = dundie.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 4)
+review_34 = dundie.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 5)
+review_35 = dundie.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 6)
 
 #users
 regular_user_1 = User.create!(name: "George Jungle",
@@ -50,7 +97,7 @@ merchant_employee = User.create!(name: "Dwight Schrute",
               email: "dwightkschrute@email.com",
               password: "IdentityTheftIsNotAJoke",
               role: 1,
-              merchant: bike_shop)
+              merchant: dunder)
 merchant_admin = User.create!(name: "Michael Scott",
               address: "1725 Slough Ave",
               city: "Scranton",
@@ -59,7 +106,7 @@ merchant_admin = User.create!(name: "Michael Scott",
               email: "michael.s@email.com",
               password: "WorldBestBoss",
               role: 2,
-              merchant: bike_shop)
+              merchant: dunder)
 admin_user = User.create!(name: "Leslie Knope",
               address: "14 Somewhere Ave",
               city: "Pawnee",
