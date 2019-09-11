@@ -45,6 +45,17 @@ class Merchant::ItemsController < Merchant::BaseController
     end
   end
 
+  def update_status
+    @item = Item.find(params[:item_id])
+    @item.toggle_status
+    if @item.active?
+      flash[:success] = "This item is now available for sale"
+    else
+      flash[:success] = "This item is no longer for sale"
+    end
+    redirect_to merchant_user_index_path
+  end
+
   def destroy
     item = Item.find(params[:id])
     @merchant.items.delete(item)
