@@ -11,9 +11,4 @@ class ItemsController<ApplicationController
   def show
     @item = Item.find(params[:id])
   end
-
-  private
-  def item_params
-    params.permit(:name,:description,:price,:inventory,:image)
-  end
 end
