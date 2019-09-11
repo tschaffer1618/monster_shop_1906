@@ -38,9 +38,14 @@ class MerchantsController <ApplicationController
   end
 
   def destroy
-    Item.delete(Item.where(merchant_id: params[:id]))
-    Merchant.destroy(params[:id])
-    redirect_to merchants_path
+    @merchant = Merchant.find(params[:id])
+    if current_admin? && @merchant.no_orders?
+      @merchant.destroy
+      redirect_to merchants_path
+    else
+      flash[:warning] = "This merchant cannot be deleted at this moment"
+      redirect_to merchants_path
+    end
   end
 
   def update_status
