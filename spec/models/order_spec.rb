@@ -24,10 +24,18 @@ describe Order, type: :model do
       @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
 
-      @order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      @order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, status: 0)
+        @item_order_1 = @user.item_orders.create!(order: @order_1, item: @tire, price: @tire.price, quantity: 2, fulfilled?: true)
+        @item_order_2 = @user.item_orders.create!(order: @order_1, item: @pull_toy, price: @pull_toy.price, quantity: 3, fulfilled?: true)
 
-      @user.item_orders.create!(order: @order_1, item: @tire, price: @tire.price, quantity: 2)
-      @user.item_orders.create!(order: @order_1, item: @pull_toy, price: @pull_toy.price, quantity: 3)
+      @order_2 = create(:order, name: "Jill", status: 1)
+        @item_order_3 = @user.item_orders.create(order: @order_2, item: @tire, quantity: 100, price: @tire.price, fulfilled?: true)
+
+      @order_3 = create(:order, name: "Sam", status: 3)
+        @item_order_4 = @user.item_orders.create(order: @order_3, item: @pull_toy, quantity: 18, price: @pull_toy.price, fulfilled?: true)
+
+      @order_4 = create(:order, name: "Jane", status: 2)
+        @item_order_5 = @user.item_orders.create(order: @order_4, item: @tire, quantity: 15, price: @tire.price, fulfilled?: true)
     end
 
     it 'grandtotal' do
@@ -44,6 +52,20 @@ describe Order, type: :model do
 
     it 'update_status' do
       expect(@order_1.update_status).to eq(true)
+    end
+
+    it 'sort_by_status' do
+      expected = [@order_1, @order_2, @order_4, @order_3,]
+
+      expect(Order.sort_by_status).to eq(expected)
+    end
+
+    it 'cancels orders' do
+      @order_1.cancel_order
+
+      @order_1.item_orders.each do |item_order|
+        expect(item_order.fulfilled?).to eq(false)
+      end
     end
   end
 end
