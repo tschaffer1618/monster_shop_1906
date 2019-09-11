@@ -6,7 +6,7 @@ class Item <ApplicationRecord
   has_many :users, through: :merchant
 
   validates_presence_of :name, :description, :price, :inventory
-  validates :image, presence: true, http_url: true, allow_blank: true
+  validates :image, presence: true, allow_blank: true
   validates_inclusion_of :active?, :in => [true, false]
   validates_numericality_of :price, greater_than: 0
   validates_numericality_of :inventory, greater_than_or_equal_to: 0, only_integer: true
@@ -38,11 +38,11 @@ class Item <ApplicationRecord
       "Cannot fulfill. There are no #{self.name} items remaining."
     end
   end
-  
+
   def toggle_status
     self.toggle!(:active?)
   end
-  
+
   def self.top_5
     Item.joins(:item_orders)
         .group(:id)
@@ -57,5 +57,5 @@ class Item <ApplicationRecord
         .select("items.name, sum(item_orders.quantity) as popularity")
         .order("popularity")
         .limit(5)
-  end 
+  end
 end

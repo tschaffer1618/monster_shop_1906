@@ -14,9 +14,25 @@ RSpec.describe 'merchant index page', type: :feature do
       expect(page).to have_link("Meg's Dog Shop")
     end
 
-    it 'I can see a link to create a new merchant' do
+    it 'I can see a link to create a new merchant as an admin user only' do
+      user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       visit merchants_path
+      expect(page).to_not have_link("New Merchant")
 
+      merchant_employee = create(:user, role: 1)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_employee)
+      visit merchants_path
+      expect(page).to_not have_link("New Merchant")
+
+      merchant_admin = create(:user, role: 2)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_admin)
+      visit merchants_path
+      expect(page).to_not have_link("New Merchant")
+
+      admin = create(:user, role: 3)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+      visit merchants_path
       expect(page).to have_link("New Merchant")
 
       click_on "New Merchant"

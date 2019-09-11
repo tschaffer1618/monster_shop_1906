@@ -1,5 +1,9 @@
 <h1 align = "center">Merchants</h1>
 <% if current_admin? %>
+<br>
+<p align="center"><%= link_to "New Merchant", new_merchant_path, class: "btn btn-info btn-warning" %></p>
+<br>
+
   <section class = "grid-container">
     <% @merchants.each do |merchant|%>
       <section class = "grid-item", id = "merchant-<%= merchant.id %>">
@@ -12,11 +16,12 @@
           <p>Current status: disabled</p>
           <%= link_to "Enable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-success item-buttons"%>
         <% end %>
+        <%= link_to "Update", "/merchants/#{merchant.id}/edit", class: 'btn btn-dark' %>
+        <%= link_to "Delete", "/merchants/#{merchant.id}", class: "btn btn-warning", method: :delete if merchant.no_orders?  %>
       </section>
     <% end %>
   </section>
 <% else %>
-  <p align="center"><%= link_to "New Merchant", new_merchant_path %></p>
   <section class = "grid-container">
     <% @merchants.each do |merchant|%>
       <section class = "grid-item">
