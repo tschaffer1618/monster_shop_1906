@@ -27,7 +27,17 @@
                 <td><%= item.description %></td>
                 <td><%= number_to_currency(item.price) %></td>
                 <td><%= item.inventory %></td>
-                <td><%= item.active? %></td>
+                <td><% if item.active? %>
+                  <p>Active</p>
+                  <% if current_merchant_admin? %>
+                    <%= link_to "Deactivate", "/merchant/items/#{item.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
+                  <% end %>
+                <% else %>
+                  <p>Inactive</p>
+                  <% if current_merchant_admin? %>
+                    <%= link_to "Activate", "/merchant/items/#{item.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
+                  <% end %>
+                <% end %></td>
                 <td><%= link_to "Edit", edit_merchant_user_path(item) %></td>
                 <% if item.no_orders? %>
                   <td><%= link_to "Delete", "/merchant/items/#{item.id}", method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger item-buttons" %></td>

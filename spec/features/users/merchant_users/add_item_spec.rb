@@ -51,7 +51,7 @@ RSpec.describe "Merchant Items Page" do
             expect(page).to have_content("$#{price}")
             expect(page).to have_css("img[src*='#{image_url}']")
             expect(page).to have_content(inventory)
-            expect(page).to have_content("true")  # how to check contents for enabled? and active? they need to be more specfic
+            expect(page).to have_content("Active")  # how to check contents for enabled? and active? they need to be more specfic
           end
         end
       end

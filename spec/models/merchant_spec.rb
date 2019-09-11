@@ -67,7 +67,7 @@ describe Merchant, type: :model do
 
     it 'deactivate_items' do
       merchant = create(:merchant)
-      item = merchant.items.create(attributes_for(:item))
+      item = merchant.items.create(attributes_for(:item, active?: true))
 
       expect(item.active?).to be true
 

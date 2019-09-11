@@ -164,3 +164,27 @@ td, th {
 .table > tbody > tr > td {
   vertical-align: middle;
 }
+
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+.profile-img {
+  width: 15%;
+  display: block;
+  margin: auto;
+}
+
+#login-form {
+  width: 50%;
+  display: block;
+  margin: auto;
+}
