@@ -36,11 +36,12 @@ class Order <ApplicationRecord
 
   def cancel_order
     self.item_orders.each do |item_order|
+      if item_order.fulfilled?
+        item_order.item.increase_inventory(item_order)
+      end
       item_order.update(fulfilled?: false)
       item_order.save
-    
       item = Item.find(item_order.item_id)
-      item_order.item.increase_inventory(item_order)
       item.save
     end
   end
