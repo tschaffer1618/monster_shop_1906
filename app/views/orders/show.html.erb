@@ -19,7 +19,7 @@
     </tr>
   </table>
 </section>
-
+<br><br>
 <h1 align = "center">Order Info</h1>
 <center>
   <table>
@@ -44,9 +44,9 @@
     </tr>
   <% end %>
 </table>
-
+<br>
 <section id="grandtotal">
-  <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
+  <h3>Total: <%=number_to_currency(@order.grandtotal)%></h3>
 </section>
 <section id="datecreated">
   <p>Order Placed: <%= @order.created_at.strftime('%D')%></p>

@@ -44,42 +44,42 @@ RSpec.describe "Admin Dashboard page" do
 
     visit admin_path
 
-    within "#orders-#{@order_1.id}-3" do
+    within "#orders-#{@order_1.id}" do
       expect(page).to have_content(@regular_user_1.name)
       expect(page).to have_content(@order_1.id)
       expect(page).to have_content(@order_1.created_at)
       expect(page).to have_content("pending")
     end
 
-    within "#orders-#{@order_5.id}-4" do
+    within "#orders-#{@order_5.id}" do
       expect(page).to have_content(@regular_user_1.name)
       expect(page).to have_content(@order_5.id)
       expect(page).to have_content(@order_5.created_at)
       expect(page).to have_content("pending")
     end
 
-    within "#orders-#{@order_2.id}-1" do
+    within "#orders-#{@order_2.id}" do
       expect(page).to have_content(@regular_user_2.name)
       expect(page).to have_content(@order_2.id)
       expect(page).to have_content(@order_2.created_at)
       expect(page).to have_content("packaged")
     end
 
-    within "#orders-#{@order_6.id}-2" do
+    within "#orders-#{@order_6.id}" do
       expect(page).to have_content(@regular_user_2.name)
       expect(page).to have_content(@order_6.id)
       expect(page).to have_content(@order_6.created_at)
       expect(page).to have_content("packaged")
     end
 
-    within "#orders-#{@order_3.id}-5" do
+    within "#orders-#{@order_3.id}" do
       expect(page).to have_content(@regular_user_2.name)
       expect(page).to have_content(@order_3.id)
       expect(page).to have_content(@order_3.created_at)
       expect(page).to have_content("shipped")
     end
 
-    within "#orders-#{@order_4.id}-6" do
+    within "#orders-#{@order_4.id}" do
       expect(page).to have_content(@regular_user_1.name)
       expect(page).to have_content(@order_4.id)
       expect(page).to have_content(@order_4.created_at)
@@ -92,17 +92,17 @@ RSpec.describe "Admin Dashboard page" do
 
     visit admin_path
 
-    within "#orders-#{@order_2.id}-1" do
+    within "#orders-#{@order_2.id}" do
       expect(page).to have_content("packaged")
       expect(page).to have_button("Ship Item")
     end
 
-    within "#orders-#{@order_6.id}-2" do
+    within "#orders-#{@order_6.id}" do
       expect(page).to have_content("packaged")
       expect(page).to have_button("Ship Item")
     end
 
-    within "#orders-#{@order_4.id}-6" do
+    within "#orders-#{@order_4.id}" do
       expect(page).to have_content("cancelled")
       expect(page).not_to have_button("Ship Item")
       expect(page).to have_content("No Action Available")
@@ -113,7 +113,7 @@ RSpec.describe "Admin Dashboard page" do
 
     visit admin_path
 
-    within "#orders-#{@order_2.id}-1" do
+    within "#orders-#{@order_2.id}" do
       click_button("Ship Item")
     end
 
@@ -121,7 +121,7 @@ RSpec.describe "Admin Dashboard page" do
 
     expect(page).to have_content("Order ##{@order_2.id} has been shipped!")
 
-    within "#orders-#{@order_2.id}-5" do
+    within "#orders-#{@order_2.id}" do
       expect(page).to have_content(@regular_user_2.name)
       expect(page).to have_content(@order_2.id)
       expect(page).to have_content(@order_2.created_at)
