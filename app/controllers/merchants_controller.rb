@@ -61,9 +61,4 @@ class MerchantsController <ApplicationController
   def merchant_params
     params.require(:merchant).permit(:name,:address,:city,:state,:zip,:enabled?)
   end
-
-  def status_params
-    params.require(:merchant).permit(:enabled?)
-  end
-
 end

@@ -10,7 +10,7 @@
           <%= link_to "Disable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
         <% else %>
           <p>Current status: disabled</p>
-          <%= link_to "Enable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-danger item-buttons"%>
+          <%= link_to "Enable", "/merchants/#{merchant.id}/update_status", method: :patch, class: "btn btn-success item-buttons"%>
         <% end %>
       </section>
     <% end %>

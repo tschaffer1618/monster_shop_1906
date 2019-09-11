@@ -35,6 +35,22 @@ RSpec.describe "Merchant Items Page" do
         expect(current_path).to eq(merchant_user_index_path)
         expect(page).to have_content("Your item is now updated!")
         expect(page).to have_css("img[src*='https://avatars3.githubusercontent.com/u/6475745?s=88&v=4']")
+
+        visit merchant_user_index_path
+
+        within "#item-#{@item_2.id}" do
+          expect(page).to have_link("Edit")
+          click_link("Edit")
+        end
+
+        expect(current_path).to eq(edit_merchant_user_path(@item_2))
+
+        fill_in 'Name', with: ''
+        fill_in 'Price', with: ''
+
+        click_on("Update Item")
+
+        expect(page).to have_content("Name can't be blank, Price can't be blank, and Price is not a number")
       end
     end
 
