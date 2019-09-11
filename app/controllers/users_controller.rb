@@ -59,6 +59,12 @@ class UsersController< ApplicationController
     @item_orders = @user.item_orders
   end
 
+  def show_order
+    @user = current_user
+    @item_orders = @user.item_orders
+    @order = Order.find(params[:id])
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :address, :city, :state, :zipcode, :email, :password, :password_confirmation)

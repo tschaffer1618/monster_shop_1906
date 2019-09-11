@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get "/profile/edit_password", to: "users#edit_password"
   patch "/profile/update_password", to: "users#update_password"
   get "/profile/orders", to: "users#show_orders"
+  get "/profile/orders/:id", to: "users#show_order"
 
   post "/cart/:item_id", to: "cart#add_item"
   get "/cart", to: "cart#show"
