@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
 
   def visitor_with_items?
     current_user.nil? && cart.contents.present?
-  end 
-    
+  end
+
   def require_user
     render file: "/public/404" if current_user.nil?
   end
