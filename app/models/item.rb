@@ -38,7 +38,7 @@ class Item <ApplicationRecord
       "Cannot fulfill. There are no #{self.name} items remaining."
     end
   end
-
+  
   def toggle_status
     self.toggle!(:active?)
   end

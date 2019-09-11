@@ -96,6 +96,7 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_content(4)
         expect(page).to have_content(item_2.name)
         expect(page).to have_content(2)
+        expect(page).not_to have_content(item_1.name)
       end
 
       within "#bottom_five" do
@@ -109,6 +110,7 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_content(4)
         expect(page).to have_content(item_2.name)
         expect(page).to have_content(2)
+        expect(page).not_to have_content(item_6.name)
       end
     end
   end
