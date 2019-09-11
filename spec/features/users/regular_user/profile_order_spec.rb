@@ -52,9 +52,31 @@ RSpec.describe "User Profile Order Page" do
 
     within "#item-order-#{@item_order_1.id}" do
       expect(page).to have_link(@order_1.id)
+      expect(page).to have_content(@item_order_1.created_at)
+      expect(page).to have_content(@item_order_1.updated_at)
+      expect(page).to have_content(@item_order_1.order.status)
+    end
+
+    within "#order-stats-#{@order_1.id}" do
+      expect(page).to have_content(4)
+      expect(page).to have_content("$#{@order_1.grandtotal}")
+    end
+  end
+
+  it "can click an individual order id and see detailed info" do
+    visit "/profile/orders"
+
+    within "#item-order-#{@item_order_1.id}" do
+      click_link(@order_1.id)
+    end
+
+    expect(current_path).to eq("/profile/orders/#{@order_1.id}")
+
+    within "#item-order-#{@item_order_1.id}" do
+      expect(page).to have_link(@order_1.id)
       expect(page).to have_content(@item_1.name)
       expect(page).to have_css("#thumbnail-#{@item_order_1.id}")
-      expect(page).to have_content(@item_1.merchant.name)
+      expect(page).to have_content(@item_1.description)
       expect(page).to have_content(@item_1.price)
       expect(page).to have_content(@item_order_1.quantity)
       expect(page).to have_content(@item_order_1.subtotal)
@@ -66,31 +88,6 @@ RSpec.describe "User Profile Order Page" do
       expect(page).to have_content(@item_order_1.created_at)
       expect(page).to have_content(@item_order_1.updated_at)
       expect(page).to have_content(@item_order_1.order.status)
-
-      click_link(@order_1.id)
-    end
-
-    expect(current_path).to eq(order_path(@order_1.id))
-
-    visit "/profile/orders"
-
-    within "#item-order-#{@item_order_2.id}" do
-      expect(page).to have_link(@order_1.id)
-      expect(page).to have_content(@item_2.name)
-      expect(page).to have_css("#thumbnail-#{@item_order_2.id}")
-      expect(page).to have_content(@item_2.merchant.name)
-      expect(page).to have_content(@item_2.price)
-      expect(page).to have_content(@item_order_2.quantity)
-      expect(page).to have_content(@item_order_2.subtotal)
-      expect(page).to have_content("#{@order_1.name} #{@order_1.address} #{@order_1.city}, #{@order_1.state} #{@order_1.zip}")
-      expect(page).to have_content(@item_order_2.created_at)
-      expect(page).to have_content(@item_order_2.updated_at)
-      expect(page).to have_content(@item_order_2.order.status)
-    end
-
-    within "#order-stats-#{@order_1.id}" do
-      expect(page).to have_content(4)
-      expect(page).to have_content("$#{@order_1.grandtotal}")
     end
   end
 end
