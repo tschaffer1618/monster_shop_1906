@@ -24,7 +24,7 @@ pull_toy = dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!
 dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
 
 #dunder items
-ream = dunder.items.create(name: "Ream of Paper", description: "So much paper!", price: 8, image: "https://dundermifflinpaper.com/wp-This is content for review/uploads/2013/06/20190824_185517.jpg", inventory: 174)
+ream = dunder.items.create(name: "Ream of Paper", description: "So much paper!", price: 8, image: "https://mercari-images.global.ssl.fastly.net/photos/m66267444043_1.jpg?1567729247", inventory: 174)
 dundie = dunder.items.create(name: "Dundie Award", description: "Everyone wants one!", price: 16, image: "https://images-na.ssl-images-amazon.com/images/I/712t-j2WvwL._UX679_.jpg", inventory: 12)
 
 #tire_reviews
