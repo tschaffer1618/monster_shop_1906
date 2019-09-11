@@ -54,24 +54,17 @@ describe Merchant, type: :model do
       expect(@meg.distinct_cities.sort).to eq(["Denver","Hershey"])
     end
 
-    it 'activate_items' do
+    it 'toggle_item_status' do
       merchant = create(:merchant)
       item = merchant.items.create(attributes_for(:item, active?: false))
 
       expect(item.active?).to be false
 
-      merchant.activate_items
-
-      expect(item.active?).to be true
-    end
-
-    it 'deactivate_items' do
-      merchant = create(:merchant)
-      item = merchant.items.create(attributes_for(:item))
+      merchant.toggle_item_status
 
       expect(item.active?).to be true
 
-      merchant.deactivate_items
+      merchant.toggle_item_status
 
       expect(item.active?).to be false
     end

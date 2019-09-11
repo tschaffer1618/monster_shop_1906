@@ -30,7 +30,7 @@ RSpec.describe "Admin_user Merchant Show Page " do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_user)
   end
 
-  it "has pertinent merchant info indentical to the merchant dashboard" do
+  it "has pertinent merchant info identical to the merchant dashboard" do
     visit admin_merchant_path(@bike_shop)
 
     expect(page).to have_content(@bike_shop.name)
