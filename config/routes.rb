@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :items, as: :user
   end
 
+  patch "/merchant/items/:item_id/update_status", to: "merchant/items#update_status"
+
   resources :merchants do
     resources :items, only: [:index]
   end

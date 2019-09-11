@@ -6,11 +6,12 @@ RSpec.describe "User Profile Order Page" do
 
     @merchant_1 = create(:merchant)
 
-    @item_1 = @merchant_1.items.create!(attributes_for(:item))
-    @item_2 = @merchant_1.items.create!(attributes_for(:item))
+    @item_1 = @merchant_1.items.create!(attributes_for(:item, inventory: 10))
+    @item_2 = @merchant_1.items.create!(attributes_for(:item, inventory: 10))
 
     @order_1 = create(:order, status: 'pending')
     @order_2 = create(:order, status: 'packaged')
+
     @item_order_1 = @user.item_orders.create!(order: @order_1, item: @item_1, quantity: 1, price: @item_1.price)
     @item_order_2 = @user.item_orders.create!(order: @order_1, item: @item_2, quantity: 3, price: @item_2.price)
   end

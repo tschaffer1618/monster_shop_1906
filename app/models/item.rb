@@ -39,6 +39,10 @@ class Item <ApplicationRecord
     end
   end
 
+  def toggle_status
+    self.toggle!(:active?)
+  end
+  
   def self.top_5
     Item.joins(:item_orders)
         .group(:id)
@@ -53,5 +57,5 @@ class Item <ApplicationRecord
         .select("items.name, sum(item_orders.quantity) as popularity")
         .order("popularity")
         .limit(5)
-  end
+  end 
 end
