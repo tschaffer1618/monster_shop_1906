@@ -44,6 +44,12 @@ RSpec.describe "Admin Dashboard page" do
 
     visit admin_path
 
+    # expect(page).to have_content("#{@pencil.name}: 72 purchased so far!\n
+    #                             #{@pink_helmet.name}: 8 purchased so far!\n
+    #                             #{@pull_toy.name}: 4 purchased so far!\n
+    #                             #{@helmet.name}: 3 purchased so far!\n
+    #                             #{@tire.name}: 2 purchased so far!")
+
     within "#orders-#{@order_1.id}-3" do
       expect(page).to have_content(@regular_user_1.name)
       expect(page).to have_content(@order_1.id)
