@@ -26,3 +26,52 @@
     <% end %>
     <% end %>
 </section>
+
+<div class="container">
+  <center>
+  <h2 class="display-3">Item Statistics</h2>
+  <table class="table">
+  	<thead>
+      	<tr>
+      	<th scope="col">#</th>
+      	<th scope="col">Top 5 Items</th>
+      	<th scope="col">Quanity Sold</th>
+      	</tr>
+      	</thead>
+        <section id="top_five"
+      	<% @items.top_5.each_with_index do |item, i| %>
+      	<tbody>
+      	<tr>
+      	<th scope="row"><%= i + 1 %></th>
+      	<td><%= item.name %></td>
+      	<td><%= item.popularity %></td>
+      	</tr>
+      	</tbody>
+      	<% end %>
+      </section>
+  	</table>
+
+    <br><br>
+
+    <table class="table">
+      	<thead>
+      	<tr>
+      	<th scope="col">#</th>
+      	<th scope="col">Bottom 5 Items</th>
+      	<th scope="col">Quanity Sold</th>
+      	</tr>
+      	</thead>
+        <section id="bottom_five"
+      	<% @items.bottom_5.each_with_index do |item, i| %>
+      	<tbody>
+      	<tr>
+      	<th scope="row"><%= i + 1 %></th>
+      	<td><%= item.name %></td>
+      	<td><%= item.popularity %></td>
+      	</tr>
+      	</tbody>
+      	<% end %>
+      </section>
+    </table>
+  </center>
+</div>
