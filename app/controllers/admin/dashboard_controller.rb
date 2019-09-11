@@ -1,7 +1,7 @@
 class Admin::DashboardController < Admin::BaseController
   def index
     @admin_user = current_user
-    @orders = Order.order(status: :asc)
+    @orders = Order.sort_by_status
   end
 
   def update_status
