@@ -52,12 +52,12 @@ review_17 = pull_toy.reviews.create(title: 'Title 5', content: "This is content 
 review_18 = pull_toy.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 5)
 
 #bone_reviews
-review_19 = brush.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 5)
-review_20 = brush.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 4)
-review_21 = brush.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 1)
-review_22 = brush.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 3)
-review_23 = brush.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 5)
-review_24 = brush.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 5)
+review_19 = dog_bone.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 5)
+review_20 = dog_bone.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 4)
+review_21 = dog_bone.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 1)
+review_22 = dog_bone.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 3)
+review_23 = dog_bone.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 5)
+review_24 = dog_bone.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 5)
 
 #ream_reviews
 review_25 = ream.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 3)
@@ -68,11 +68,11 @@ review_29 = ream.reviews.create(title: 'Title 5', content: "This is content for 
 review_30 = ream.reviews.create(title: 'Title 6', content: "This is content for review 6", rating: 2)
 
 #dundie_reviews
-review_31 = ream.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 3)
-review_32 = ream.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 3)
-review_33 = ream.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 4)
-review_34 = ream.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 5)
-review_35 = ream.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 6)
+review_31 = dundie.reviews.create(title: 'Title 1', content: "This is content for review 1", rating: 3)
+review_32 = dundie.reviews.create(title: 'Title 2', content: "This is content for review 2", rating: 3)
+review_33 = dundie.reviews.create(title: 'Title 3', content: "This is content for review 3", rating: 4)
+review_34 = dundie.reviews.create(title: 'Title 4', content: "This is content for review 4", rating: 5)
+review_35 = dundie.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 6)
 
 #users
 regular_user_1 = User.create!(name: "George Jungle",
@@ -97,7 +97,7 @@ merchant_employee = User.create!(name: "Dwight Schrute",
               email: "dwightkschrute@email.com",
               password: "IdentityTheftIsNotAJoke",
               role: 1,
-              merchant: bike_shop)
+              merchant: dunder)
 merchant_admin = User.create!(name: "Michael Scott",
               address: "1725 Slough Ave",
               city: "Scranton",
@@ -106,7 +106,7 @@ merchant_admin = User.create!(name: "Michael Scott",
               email: "michael.s@email.com",
               password: "WorldBestBoss",
               role: 2,
-              merchant: bike_shop)
+              merchant: dunder)
 admin_user = User.create!(name: "Leslie Knope",
               address: "14 Somewhere Ave",
               city: "Pawnee",
