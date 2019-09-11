@@ -19,11 +19,11 @@ class OrdersController <ApplicationController
   end
 
   def create
-    user = current_user
+    @user = current_user
     order = Order.create(order_params)
     if order.save
       cart.items.each do |item,quantity|
-        user.item_orders.create({
+        @user.item_orders.create({
           order: order,
           item: item,
           quantity: quantity,
