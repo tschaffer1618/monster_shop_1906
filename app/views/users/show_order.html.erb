@@ -19,7 +19,7 @@
       </tr>
     </thead>
       <tbody>
-        <% @item_orders.where("order_id=#{@order.id}").group_by(&:order_id).each_pair do |order_id, item_orders| %>
+        <% @indiv_order.each_pair do |order_id, item_orders| %>
           <% item_orders.each do |item_order| %>
             <section id='item-order-<%= item_order.id %>'>
               <tr>

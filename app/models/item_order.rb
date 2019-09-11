@@ -25,4 +25,8 @@ class ItemOrder <ApplicationRecord
   def update_status
     self.update(fulfilled?: true)
   end
+
+  def self.display_info(order)
+    where("order_id=#{order.id}").group_by(&:order_id)
+  end
 end
