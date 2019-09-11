@@ -1,8 +1,11 @@
 <h1> Welcome, <%= @merchant_user.name %>!</h1>
 <br>
 
-<%= render partial:'merchant_info' %>
+<center>
+  <section id= "dashboard-link">
+  <h2><%= link_to "View Items", "/merchant/items", class: "btn btn-primary btn-lg" %></h2>
+  </section>
+</center>
 
-<section id= "dashboard-link">
-<h2><%= link_to "View Items", "/merchant/items" %></h2>
-</section>
+<br />
+<%= render partial:'merchant_info' %>

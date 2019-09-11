@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :cart, :current_user, :current_merchant_employee?, :current_merchant_admin?, :current_admin?
+  helper_method :cart, :current_user, :current_merchant_employee?, :current_merchant_admin?, :current_admin?, :profile_img
 
   def cart
     @cart ||= Cart.new(session[:cart] ||= Hash.new(0))
@@ -29,5 +29,16 @@ class ApplicationController < ActionController::Base
 
   def require_user
     render file: "/public/404" if current_user.nil?
+  end
+
+  def profile_img
+    [
+      "https://image.flaticon.com/icons/svg/145/145842.svg",
+      "https://image.flaticon.com/icons/svg/145/145848.svg",
+      "https://image.flaticon.com/icons/svg/145/145847.svg",
+      "https://image.flaticon.com/icons/svg/145/145843.svg",
+      "https://image.flaticon.com/icons/svg/145/145849.svg",
+      "https://image.flaticon.com/icons/svg/145/145846.svg"
+    ]
   end
 end
