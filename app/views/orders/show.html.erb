@@ -51,6 +51,3 @@
 <section id="datecreated">
   <p>Order Placed: <%= @order.created_at.strftime('%D')%></p>
 </section>
-<section id="cancel-order">
-  <%= link_to_if(@order.status == 'pending', "Cancel Order", order_cancel_path, method: :patch){} %>
-</section>
