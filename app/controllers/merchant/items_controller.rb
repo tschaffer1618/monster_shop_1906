@@ -48,7 +48,6 @@ class Merchant::ItemsController < Merchant::BaseController
   def update_status
     @item = Item.find(params[:item_id])
     @item.toggle_status
-    # @merchant.items.find(@item.id).toggle_status
     if @item.active?
       flash[:success] = "This item is now available for sale"
     else
