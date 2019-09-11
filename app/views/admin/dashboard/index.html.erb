@@ -12,8 +12,8 @@
       <th>Status</th>
       <th>Action</th>
     </tr>
-  <% @orders.each_with_index do |order, index|%>
-  <section id= "orders-<%=order.id%>-<%= index + 1 %>">
+  <% @orders.each do |order|%>
+  <section id= "orders-<%=order.id %>">
       <tr>
         <td><%=link_to order.users.first.name, admin_user_path(order.users.first)%></td>
         <td><%= order.id %></td>
