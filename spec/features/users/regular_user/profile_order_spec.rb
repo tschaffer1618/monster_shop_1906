@@ -31,11 +31,11 @@ RSpec.describe "User Profile Order Page" do
     visit "/cart"
     click_on "Checkout"
 
-    fill_in :name, with: "Bert"
-    fill_in :address, with: "123 Sesame St"
-    fill_in :city, with: "New York"
-    fill_in :state, with: "NY"
-    fill_in :zip, with: 10022
+    fill_in "Name", with: "Bert"
+    fill_in "Address", with: "123 Sesame St"
+    fill_in "City", with: "New York"
+    fill_in "State", with: "NY"
+    fill_in "Zip", with: 10022
 
     click_on "Create Order"
 

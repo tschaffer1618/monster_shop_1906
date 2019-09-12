@@ -39,58 +39,17 @@ RSpec.describe("Order Creation") do
       state = "New York"
       zip = 10001
 
-      fill_in :name, with: name
-      fill_in :address, with: address
-      fill_in :city, with: city
-      fill_in :state, with: state
-      fill_in :zip, with: zip
+      fill_in "Name", with: name
+      fill_in "Address", with: address
+      fill_in "City", with: city
+      fill_in "State", with: state
+      fill_in "Zip", with: zip
 
       click_button "Create Order"
 
       new_order = Order.last
 
       expect(current_path).to eq("/profile/orders")
-
-      visit order_path(new_order)
-      within '.shipping-address' do
-        expect(page).to have_content(name)
-        expect(page).to have_content(address)
-        expect(page).to have_content(city)
-        expect(page).to have_content(state)
-        expect(page).to have_content(zip)
-      end
-
-      within "#item-#{@paper.id}" do
-        expect(page).to have_link(@paper.name)
-        expect(page).to have_link("#{@paper.merchant.name}")
-        expect(page).to have_content("$#{@paper.price}")
-        expect(page).to have_content("2")
-        expect(page).to have_content("$40")
-      end
-
-      within "#item-#{@tire.id}" do
-        expect(page).to have_link(@tire.name)
-        expect(page).to have_link("#{@tire.merchant.name}")
-        expect(page).to have_content("$#{@tire.price}")
-        expect(page).to have_content("1")
-        expect(page).to have_content("$100")
-      end
-
-      within "#item-#{@pencil.id}" do
-        expect(page).to have_link(@pencil.name)
-        expect(page).to have_link("#{@pencil.merchant.name}")
-        expect(page).to have_content("$#{@pencil.price}")
-        expect(page).to have_content("1")
-        expect(page).to have_content("$2")
-      end
-
-      within "#grandtotal" do
-        expect(page).to have_content("Total: $142")
-      end
-
-      within "#datecreated" do
-        expect(page).to have_content(new_order.created_at.strftime('%D'))
-      end
     end
 
     it 'i cant create order if info not filled out' do
@@ -100,11 +59,11 @@ RSpec.describe("Order Creation") do
       state = "New York"
       zip = 10001
 
-      fill_in :name, with: name
-      fill_in :address, with: address
-      fill_in :city, with: city
-      fill_in :state, with: state
-      fill_in :zip, with: zip
+      fill_in "Name", with: name
+      fill_in "Address", with: address
+      fill_in "City", with: city
+      fill_in "State", with: state
+      fill_in "Zip", with: zip
 
       click_button "Create Order"
 

@@ -6,7 +6,7 @@ RSpec.describe "As an admin user" do
       admin = create(:user, role: 3)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
     end
-    
+
     it "I can delete a merchant" do
       bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Richmond', state: 'VA', zip: 80203)
 
@@ -69,11 +69,11 @@ RSpec.describe "As an admin user" do
       state = "New York"
       zip = 10001
 
-      fill_in :name, with: name
-      fill_in :address, with: address
-      fill_in :city, with: city
-      fill_in :state, with: state
-      fill_in :zip, with: zip
+      fill_in "Name", with: name
+      fill_in "Address", with: address
+      fill_in "City", with: city
+      fill_in "State", with: state
+      fill_in "Zip", with: zip
 
       click_button "Create Order"
 
