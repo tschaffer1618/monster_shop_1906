@@ -2,10 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Merchant Items Page" do
   describe "As a merchant admin" do
-    before :each do
+    before :each do 
       shop = create(:merchant)
-      # item attributes are randomly generated; there may be duplicates.
-      # To avoid this scenario, item name is explicitly assigned.
       @item_1 = shop.items.create!(attributes_for(:item, name: "apple"))  # order placed, cannot delete
       @item_2 = shop.items.create!(attributes_for(:item, name: "orange")) # order not placed, can delete
 

@@ -1,16 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Merchant Dashboard" do
-  # before :each do
-  #   @merchant_1 = create(:merchant)
-  #
-  #   @item_1 = @merchant_1.items.create!(attributes_for(:item))
-  #   @item_2 = @merchant_1.items.create!(attributes_for(:item))
-  #
-  #   @merchant_admin = create(:user, role: 2, merchant: @merchant_1)
-  #   @merchant_employee = create(:user, role: 1, merchant: @merchant_1)
-  # end
-
   it 'merchant admin sees link to view shop items' do
     merchant_1 = create(:merchant)
 

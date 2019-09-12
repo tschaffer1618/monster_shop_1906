@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Merchant Order Show Page" do
   before :each do
-
     @regular_user_1 = create(:user)
 
     @merchant_shop_1 = create(:merchant, name: "Merchant Shop 1")
@@ -81,6 +80,7 @@ RSpec.describe "Merchant Order Show Page" do
 
     expect(page).not_to have_css("#item_orders-#{@item_order_4.id}")
   end
+  
   it 'merchant user cannot see the shipping information if not their order' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_admin_1)
 

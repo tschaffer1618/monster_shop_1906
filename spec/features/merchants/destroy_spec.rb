@@ -50,7 +50,6 @@ RSpec.describe "As an admin user" do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(regular_user)
 
-
       visit item_path(paper)
       click_on "Add To Cart"
       visit item_path(paper)

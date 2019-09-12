@@ -1,5 +1,4 @@
-class SessionsController<ApplicationController
-
+class SessionsController < ApplicationController
   def new
     if session[:user_id].nil?
       render "users/login"

@@ -94,6 +94,7 @@ RSpec.describe "User Profile Order Page" do
 
   it "I can cancel the order only if it's pending" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+    
     visit "/profile/orders/#{@order_1.id}"
 
     expect(page).to have_link("Cancel Order")

@@ -35,8 +35,6 @@ RSpec.describe "Admin Dashboard page" do
       @item_order_8 = @regular_user_2.item_orders.create(order: @order_6, item: @item_3, quantity: 10, price: @item_3.price, user: @regular_user_1, fulfilled?: true)
 
     @admin_1 = create(:user, name: "Admin 1", role: 3)
-
-
   end
 
   it 'can show all orders sorted by status' do

@@ -1,4 +1,4 @@
-class Order <ApplicationRecord
+class Order < ApplicationRecord
   validates_presence_of :name, :address, :city, :state, :zip, :status
 
   has_many :item_orders
@@ -7,7 +7,6 @@ class Order <ApplicationRecord
   has_many :users, through: :item_orders
 
   enum status: [:packaged, :pending, :shipped, :cancelled]
-
 
   def grandtotal
     item_orders.sum('price * quantity')

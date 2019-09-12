@@ -1,4 +1,4 @@
-class UsersController< ApplicationController
+class UsersController < ApplicationController
   before_action :require_user, except: [:new, :create]
   before_action :set_user, except: [:new, :create]
 
@@ -65,6 +65,7 @@ class UsersController< ApplicationController
   end
 
   private
+  
   def user_params
     params.require(:user).permit(:name, :address, :city, :state, :zipcode, :email, :password, :password_confirmation)
   end

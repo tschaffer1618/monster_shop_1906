@@ -1,5 +1,4 @@
 class CartController < ApplicationController
-
   before_action :check_for_admin_user
 
   def check_for_admin_user

@@ -1,4 +1,4 @@
-class ReviewsController<ApplicationController
+class ReviewsController < ApplicationController
   before_action :set_item
 
   def set_item
