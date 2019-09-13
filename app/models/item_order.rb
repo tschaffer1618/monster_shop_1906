@@ -3,7 +3,6 @@ class ItemOrder < ApplicationRecord
   validates :fulfilled?, inclusion: {:in => [true, false]}
   belongs_to :item
   belongs_to :order
-  belongs_to :user
   has_many :merchants, through: :item
 
   def subtotal

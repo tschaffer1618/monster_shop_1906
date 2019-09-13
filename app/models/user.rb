@@ -7,8 +7,9 @@ class User < ApplicationRecord
   uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
 
-  has_many :item_orders
-  has_many :orders, through: :item_orders
+  has_many :addresses
+  has_many :orders, through: :addresses
+  has_many :item_orders, through: :orders
   belongs_to :merchant, optional: true
 
   enum role: [:regular_user, :merchant_employee, :merchant_admin, :admin_user]
