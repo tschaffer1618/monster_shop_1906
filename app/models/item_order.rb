@@ -1,6 +1,7 @@
 class ItemOrder < ApplicationRecord
   validates_presence_of :item_id, :order_id, :price, :quantity
   validates :fulfilled?, inclusion: {:in => [true, false]}
+  
   belongs_to :item
   belongs_to :order
   has_many :merchants, through: :item
