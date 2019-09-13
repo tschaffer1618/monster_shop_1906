@@ -7,7 +7,6 @@ describe Item, type: :model do
     it { should allow_value(nil).for(:image) }
     it { should validate_numericality_of :price }
     it { should validate_numericality_of(:inventory).only_integer }
-    it { should validate_inclusion_of(:active?).in_array([true,false]) }
   end
 
   describe "relationships" do
