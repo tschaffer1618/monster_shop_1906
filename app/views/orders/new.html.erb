@@ -22,23 +22,7 @@
 </table>
 <h3 align = "right">Total: <%= number_to_currency(cart.total)%></h3>
 <center>
-  <h2>Shipping Info:</h2>
   <%= form_for(@order, url: "/profile/orders") do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-
-    <%= f.label :state %>
-    <%= f.text_field :state %>
-
-    <%= f.label :zip %>
-    <%= f.number_field :zip %>
-
     <%= f.submit %>
   <% end %>
 </center>
