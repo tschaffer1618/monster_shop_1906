@@ -6,7 +6,7 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :state
       t.string :zipcode
-      t.string :nickname
+      t.string :nickname, default: 'home'
       t.references :user, foreign_key: true
 
       t.timestamps
