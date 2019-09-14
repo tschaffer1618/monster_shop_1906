@@ -50,9 +50,10 @@ RSpec.describe "Show Merchant Dashboard" do
 
     it "When I visit my merchant dashboard, if any users have pending orders containing items I sell, then I see a list of these orders with order ID (linked to order show page), date the order was made, total quantity of my items in the order, and the total value of my items for that order" do
       user = create(:user)
-      order_1 = create(:order)
-      item_order_1 = user.item_orders.create!(order: order_1, item: @chain, quantity: 1, price: @chain.price)
-      item_order_2 = user.item_orders.create!(order: order_1, item: @tire, quantity: 1, price: @tire.price)
+      address_1 = user.addresses.create(name: user.name, street_address: user.address, city: user.city, state: user.state, zipcode: user.zipcode, nickname: 'home')
+      order_1 = address_1.orders.create
+      item_order_1 = order_1.item_orders.create(item: @chain, quantity: 1, price: @chain.price)
+      item_order_2 = order_1.item_orders.create(item: @tire, quantity: 1, price: @tire.price)
 
       visit login_path
 
