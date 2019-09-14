@@ -4,14 +4,13 @@ RSpec.describe "Merchant Items Page" do
   describe "As a merchant admin" do
     before :each do
       shop = create(:merchant)
-      # item attributes are randomly generated; there may be duplicates.
-      # To avoid this scenario, item name is explicitly assigned.
       @item_1 = shop.items.create!(attributes_for(:item, name: "apple"))  # order placed, cannot delete
       @item_2 = shop.items.create!(attributes_for(:item, name: "orange")) # order not placed, can delete
 
       user = create(:user)
-      order = create(:order)
-      item_order = user.item_orders.create!(order: order, item: @item_1, quantity: 1, price: @item_1.price)
+      address_1 = user.addresses.create(name: user.name, street_address: user.address, city: user.city, state: user.state, zipcode: user.zipcode, nickname: 'home')
+      order = address_1.orders.create
+      item_order = order.item_orders.create(item: @item_1, quantity: 1, price: @item_1.price)
 
       merchant_admin = create(:user, role: 2, merchant: shop)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_admin)

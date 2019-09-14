@@ -1,20 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe "Visitor Restrictions" do
-  it 'visitor cannot visit merchant dashboard' do
-    visit "/merchant"
+describe "As a visitor" do
+  it 'the merchant path is inaccessible' do
+    visit merchant_user_path
 
     expect(page).to have_content("The page you were looking for doesn't exist.")
   end
 
-  it 'visitor cannot visit admin dashboard' do
-    visit "/admin"
+  it 'the admin path is inaccessible' do
+    visit admin_path
 
     expect(page).to have_content("The page you were looking for doesn't exist.")
   end
 
-  it 'visitor cannot visit a user profile' do
-    visit "/profile"
+  it 'the profile path is inaccessible' do
+    visit profile_path
 
     expect(page).to have_content("The page you were looking for doesn't exist.")
   end

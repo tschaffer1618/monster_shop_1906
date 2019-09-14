@@ -48,8 +48,9 @@ RSpec.describe "As an admin user" do
                     email: "junglegeorge@email.com",
                     password: "Tree123")
 
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(regular_user)
+      address_1 = regular_user.addresses.create(name: regular_user.name, street_address: regular_user.address, city: regular_user.city, state: regular_user.state, zipcode: regular_user.zipcode, nickname: 'home')
 
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(regular_user)
 
       visit item_path(paper)
       click_on "Add To Cart"
@@ -62,18 +63,6 @@ RSpec.describe "As an admin user" do
 
       visit "/cart"
       click_on "Checkout"
-
-      name = "Bert"
-      address = "123 Sesame St."
-      city = "NYC"
-      state = "New York"
-      zip = 10001
-
-      fill_in "Name", with: name
-      fill_in "Address", with: address
-      fill_in "City", with: city
-      fill_in "State", with: state
-      fill_in "Zip", with: zip
 
       click_button "Create Order"
 

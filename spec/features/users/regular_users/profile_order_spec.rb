@@ -3,17 +3,19 @@ require 'rails_helper'
 RSpec.describe "User Profile Order Page" do
   before :each do
     @user = create(:user)
+    @address_1 = @user.addresses.create(name: @user.name, street_address: @user.address, city: @user.city, state: @user.state, zipcode: @user.zipcode, nickname: 'home')
+
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
     merchant_1 = create(:merchant)
 
-    @item_1 = merchant_1.items.create!(attributes_for(:item))
-    @item_2 = merchant_1.items.create!(attributes_for(:item))
+    @item_1 = merchant_1.items.create(attributes_for(:item))
+    @item_2 = merchant_1.items.create(attributes_for(:item))
 
-    @order_1 = create(:order)
-    @order_2 = create(:order, status: 'packaged')
-    @item_order_1 = @user.item_orders.create!(order: @order_1, item: @item_1, quantity: 1, price: @item_1.price)
-    @item_order_2 = @user.item_orders.create!(order: @order_1, item: @item_2, quantity: 3, price: @item_2.price)
+    @order_1 = @address_1.orders.create
+    @order_2 = @address_1.orders.create(status: 'packaged')
+    @item_order_1 = @order_1.item_orders.create(item: @item_1, quantity: 1, price: @item_1.price)
+    @item_order_2 = @order_1.item_orders.create(item: @item_2, quantity: 3, price: @item_2.price)
   end
 
   it "see a link to my orders" do
@@ -31,12 +33,6 @@ RSpec.describe "User Profile Order Page" do
     visit "/cart"
     click_on "Checkout"
 
-    fill_in "Name", with: "Bert"
-    fill_in "Address", with: "123 Sesame St"
-    fill_in "City", with: "New York"
-    fill_in "State", with: "NY"
-    fill_in "Zip", with: 10022
-
     click_on "Create Order"
 
     expect(current_path).to eq("/profile/orders")
@@ -52,7 +48,7 @@ RSpec.describe "User Profile Order Page" do
     visit "/profile/orders"
 
     within "#item-order-#{@item_order_1.id}" do
-      expect(page).to have_link(@order_1.id)
+      expect(page).to have_link("#{@order_1.id}")
       expect(page).to have_content(@item_order_1.created_at)
       expect(page).to have_content(@item_order_1.updated_at)
       expect(page).to have_content(@item_order_1.order.status)
@@ -68,24 +64,24 @@ RSpec.describe "User Profile Order Page" do
     visit "/profile/orders"
 
     within "#item-order-#{@item_order_1.id}" do
-      click_link(@order_1.id)
+      click_link("#{@order_1.id}")
     end
 
     expect(current_path).to eq("/profile/orders/#{@order_1.id}")
 
     within "#item-order-#{@item_order_1.id}" do
-      expect(page).to have_link(@order_1.id)
+      expect(page).to have_link("#{@order_1.id}")
       expect(page).to have_content(@item_1.name)
       expect(page).to have_css("#thumbnail-#{@item_order_1.id}")
       expect(page).to have_content(@item_1.description)
       expect(page).to have_content(@item_1.price)
       expect(page).to have_content(@item_order_1.quantity)
       expect(page).to have_content(@item_order_1.subtotal)
-      expect(page).to have_content(@order_1.name)
-      expect(page).to have_content(@order_1.address)
-      expect(page).to have_content(@order_1.city)
-      expect(page).to have_content(@order_1.state)
-      expect(page).to have_content(@order_1.zip)
+      expect(page).to have_content(@order_1.address.name)
+      expect(page).to have_content(@order_1.address.street_address)
+      expect(page).to have_content(@order_1.address.city)
+      expect(page).to have_content(@order_1.address.state)
+      expect(page).to have_content(@order_1.address.zipcode)
       expect(page).to have_content(@item_order_1.created_at)
       expect(page).to have_content(@item_order_1.updated_at)
       expect(page).to have_content(@item_order_1.order.status)
@@ -94,6 +90,7 @@ RSpec.describe "User Profile Order Page" do
 
   it "I can cancel the order only if it's pending" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
     visit "/profile/orders/#{@order_1.id}"
 
     expect(page).to have_link("Cancel Order")

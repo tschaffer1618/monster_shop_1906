@@ -7,7 +7,6 @@ describe Item, type: :model do
     it { should allow_value(nil).for(:image) }
     it { should validate_numericality_of :price }
     it { should validate_numericality_of(:inventory).only_integer }
-    it { should validate_inclusion_of(:active?).in_array([true,false]) }
   end
 
   describe "relationships" do
@@ -31,9 +30,12 @@ describe Item, type: :model do
       @review_4 = @chain.reviews.create(title: "Not too impressed", content: "v basic bike shop", rating: 2)
       @review_5 = @chain.reviews.create(title: "Okay place :/", content: "Brian's cool and all but just an okay selection of items", rating: 3)
 
-      @order_1 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, status: "pending")
-      @order_2 = Order.create(name: 'Mack', address: '123 Happy St', city: 'Denver', state: 'CO', zip: 80205, status: "pending")
-        @item_order_1 = @user.item_orders.create!(order: @order_2, item: @watch, quantity: 2, price: @watch.price, user: @user, fulfilled?: false)
+      @address_1 = @user.addresses.create(name: @user.name, street_address: @user.address, city: @user.city, state: @user.state, zipcode: @user.zipcode, nickname: 'home')
+      @address_2 = @user.addresses.create(name: 'Rex Dinosaur', street_address: '12 Toy Lane', city: 'Chicago', state: 'IL', zipcode: '75405', nickname: 'rex house')
+
+      @order_1 = @address_1.orders.create(status: "pending")
+      @order_2 = @address_2.orders.create(status: "pending")
+        @item_order_1 = @order_2.item_orders.create(item: @watch, quantity: 2, price: @watch.price, fulfilled?: false)
     end
 
     it "calculate average review" do
@@ -51,7 +53,7 @@ describe Item, type: :model do
     it 'no orders' do
       expect(@chain.no_orders?).to eq(true)
 
-      @user.item_orders.create(order: @order_1, item: @chain, price: @chain.price, quantity: 2)
+      @order_1.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
       expect(@chain.no_orders?).to eq(false)
     end
 
@@ -89,17 +91,19 @@ describe Item, type: :model do
       items = [item_1, item_2, item_3, item_4, item_5, item_6]
 
       user = create(:user)
-      order_1 = create(:order)
-      item_order_1 = user.item_orders.create!(order: order_1, item: item_6, quantity: 6, price: item_6.price)
-      item_order_2 = user.item_orders.create!(order: order_1, item: item_5, quantity: 5, price: item_5.price)
-      item_order_3 = user.item_orders.create!(order: order_1, item: item_4, quantity: 4, price: item_4.price)
-      item_order_4 = user.item_orders.create!(order: order_1, item: item_3, quantity: 3, price: item_3.price)
+      address_1 = user.addresses.create(name: user.name, street_address: user.address, city: user.city, state: user.state, zipcode: user.zipcode, nickname: 'home')
 
-      order_2 = create(:order)
-      item_order_5 = user.item_orders.create!(order: order_2, item: item_6, quantity: 6, price: item_6.price)
-      item_order_6 = user.item_orders.create!(order: order_2, item: item_1, quantity: 1, price: item_1.price)
-      item_order_7 = user.item_orders.create!(order: order_2, item: item_2, quantity: 2, price: item_2.price)
-      item_order_8 = user.item_orders.create!(order: order_2, item: item_3, quantity: 3, price: item_3.price)
+      order_1 = address_1.orders.create
+      item_order_1 = order_1.item_orders.create(item: item_6, quantity: 6, price: item_6.price)
+      item_order_2 = order_1.item_orders.create(item: item_5, quantity: 5, price: item_5.price)
+      item_order_3 = order_1.item_orders.create(item: item_4, quantity: 4, price: item_4.price)
+      item_order_4 = order_1.item_orders.create(item: item_3, quantity: 3, price: item_3.price)
+
+      order_2 = address_1.orders.create
+      item_order_5 = order_2.item_orders.create(item: item_6, quantity: 6, price: item_6.price)
+      item_order_6 = order_2.item_orders.create(item: item_1, quantity: 1, price: item_1.price)
+      item_order_7 = order_2.item_orders.create(item: item_2, quantity: 2, price: item_2.price)
+      item_order_8 = order_2.item_orders.create(item: item_3, quantity: 3, price: item_3.price)
 
       expect(Item.top_5.map { |item| item.name }).to eq([item_6.name, item_3.name, item_5.name, item_4.name, item_2.name])
       expect(Item.bottom_5.map { |item| item.name }).to eq([item_1.name, item_2.name, item_4.name, item_5.name, item_3.name])

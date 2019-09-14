@@ -23,9 +23,10 @@ RSpec.describe "Admin_user Merchant Show Page " do
     @admin_user = create(:user, role: 3)
 
     @user = create(:user)
-    @order_1 = create(:order)
-    @item_order_1 = @user.item_orders.create!(order: @order_1, item: @chain, quantity: 1, price: @chain.price)
-    @item_order_2 = @user.item_orders.create!(order: @order_1, item: @tire, quantity: 1, price: @tire.price)
+    @address_1 = @user.addresses.create(name: @user.name, street_address: @user.address, city: @user.city, state: @user.state, zipcode: @user.zipcode, nickname: 'home')
+    @order_1 = @address_1.orders.create
+    @item_order_1 = @order_1.item_orders.create(item: @chain, quantity: 1, price: @chain.price)
+    @item_order_2 = @order_1.item_orders.create(item: @tire, quantity: 1, price: @tire.price)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_user)
   end

@@ -1,13 +1,12 @@
-class Order <ApplicationRecord
-  validates_presence_of :name, :address, :city, :state, :zip, :status
+class Order < ApplicationRecord
+  validates_presence_of :status
 
+  belongs_to :address
   has_many :item_orders
   has_many :items, through: :item_orders
-  has_many :merchants, through: :item
-  has_many :users, through: :item_orders
+  has_many :merchants, through: :items
 
   enum status: [:packaged, :pending, :shipped, :cancelled]
-
 
   def grandtotal
     item_orders.sum('price * quantity')
@@ -18,10 +17,10 @@ class Order <ApplicationRecord
   end
 
   def to_s
-    "#{self.name}
-    #{self.address}
-    #{self.city}, #{self.state}
-    #{self.zip}
+    "#{self.address.name}
+    #{self.address.street_address}
+    #{self.address.city}, #{self.address.state}
+    #{self.address.zipcode}
     "
   end
 

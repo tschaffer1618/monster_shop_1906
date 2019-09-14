@@ -22,6 +22,5 @@ RSpec.describe 'merchant show page', type: :feature do
 
       expect(current_path).to eq(merchant_items_path(@bike_shop))
     end
-
   end
 end

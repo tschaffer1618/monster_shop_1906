@@ -1,4 +1,4 @@
-class OrdersController <ApplicationController
+class OrdersController < ApplicationController
 
   def new
     @user = current_user
@@ -17,10 +17,10 @@ class OrdersController <ApplicationController
 
   def create
     @user = current_user
-    @order = Order.create(order_params)
+    @order = @user.home_address.orders.create(order_params)
     if @order.save
       cart.items.each do |item,quantity|
-        @user.item_orders.create({
+        @order.item_orders.create({
           order: @order,
           item: item,
           quantity: quantity,
@@ -38,6 +38,6 @@ class OrdersController <ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:name, :address, :city, :state, :zip)
+    params.require(:order).permit(:status)
   end
 end

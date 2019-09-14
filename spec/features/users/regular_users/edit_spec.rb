@@ -60,6 +60,7 @@ RSpec.describe "User Profile" do
   end
 
   it 'user cannot enter invalid email' do
+    
     within "#user-profile-actions" do
       click_link("Edit Profile")
     end

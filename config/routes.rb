@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     resources :reviews, except: [:show, :index]
   end
 
-  # resources :orders, only: [:new, :create]
   patch "/orders/:id", to: "orders#cancel", as: :order_cancel
 
   namespace :admin do

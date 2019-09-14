@@ -1,4 +1,4 @@
-class UsersController< ApplicationController
+class UsersController < ApplicationController
   before_action :require_user, except: [:new, :create]
   before_action :set_user, except: [:new, :create]
 
@@ -13,6 +13,7 @@ class UsersController< ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @address = @user.addresses.create(name: @user.name, street_address: @user.address, city: @user.city, state: @user.state, zipcode: @user.zipcode, nickname: 'home')
       session[:user_id] = @user.id
       flash[:success] = "Welcome #{@user.name}! You are now registered and logged in."
       redirect_to "/profile"
@@ -65,6 +66,7 @@ class UsersController< ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :address, :city, :state, :zipcode, :email, :password, :password_confirmation)
   end

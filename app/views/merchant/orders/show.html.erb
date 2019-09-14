@@ -9,11 +9,11 @@
       <th>Zip</th>
     </tr>
     <tr>
-      <td><p><%= @order.name %> </p></td>
-      <td><p><%= @order.address %> </p></td>
-      <td><p><%= @order.city %> </p></td>
-      <td><p><%= @order.state %> </p></td>
-      <td><p><%= @order.zip %> </p></td>
+      <td><p><%= @order.address.name %> </p></td>
+      <td><p><%= @order.address.street_address %> </p></td>
+      <td><p><%= @order.address.city %> </p></td>
+      <td><p><%= @order.address.state %> </p></td>
+      <td><p><%= @order.address.zipcode %> </p></td>
     </tr>
   </table>
 </section>
