@@ -27,6 +27,7 @@ RSpec.describe("New Order Page") do
       visit item_path(@pencil)
       click_on "Add To Cart"
     end
+
     it "I see all the information about my current cart" do
       visit "/cart"
 
@@ -57,18 +58,6 @@ RSpec.describe("New Order Page") do
       end
 
       expect(page).to have_content("Total: $142")
-    end
-
-    it "I see a form where I can enter my shipping info" do
-      visit "/cart"
-      click_on "Checkout"
-
-      expect(page).to have_field("Name")
-      expect(page).to have_field("Address")
-      expect(page).to have_field("City")
-      expect(page).to have_field("State")
-      expect(page).to have_field("Zip")
-      expect(page).to have_button("Create Order")
     end
   end
 end
