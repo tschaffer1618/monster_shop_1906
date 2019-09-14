@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def item_orders_by_merchant(order_id)
     self.merchant.item_orders.where(order: order_id)
   end
+
+  def home_address
+    self.addresses.find_by(nickname: 'home')
+  end
 end

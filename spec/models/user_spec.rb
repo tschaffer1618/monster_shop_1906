@@ -127,5 +127,12 @@ describe User, type: :model do
 
       expect(expected).to eq(merchant_admin.item_orders_by_merchant(order_1))
     end
+
+    it 'home_address' do
+      regular_user_1 = create(:user)
+      address_1 = regular_user_1.addresses.create(name: 'Rex Dinosaur', street_address: '12 Toy Lane', city: 'Chicago', state: 'IL', zipcode: '75405', nickname: 'home')
+
+      expect(regular_user_1.home_address).to eq(address_1)
+    end
   end
 end
