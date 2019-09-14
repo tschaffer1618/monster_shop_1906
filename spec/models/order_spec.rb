@@ -9,6 +9,7 @@ describe Order, type: :model do
     it { should belong_to :address }
     it { should have_many :item_orders }
     it { should have_many(:items).through(:item_orders) }
+    it { should have_many(:merchants).through(:items) }
   end
 
   describe 'instance methods' do
@@ -45,8 +46,8 @@ describe Order, type: :model do
       expect(@order_1.total_items).to eq(5)
     end
 
-    xit 'to_s' do
-      expect(@order_1.to_s).to eq("Meg\n    123 Stang Ave\n    Hershey, PA\n    17033\n    ")
+    it 'to_s' do
+      expect(@order_3.to_s).to eq("Rex Dinosaur\n    12 Toy Lane\n    Chicago, IL\n    75405\n    ")
     end
 
     it 'update_status' do
