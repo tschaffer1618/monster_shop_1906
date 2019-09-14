@@ -33,42 +33,11 @@ RSpec.describe("Order Creation") do
     end
 
     it 'I can create a new order' do
-      name = "Bert"
-      address = "123 Sesame St."
-      city = "NYC"
-      state = "New York"
-      zip = 10001
-
-      fill_in "Name", with: name
-      fill_in "Address", with: address
-      fill_in "City", with: city
-      fill_in "State", with: state
-      fill_in "Zip", with: zip
-
       click_button "Create Order"
 
       new_order = Order.last
 
       expect(current_path).to eq("/profile/orders")
-    end
-
-    it 'i cant create order if info not filled out' do
-      name = ""
-      address = "123 Sesame St."
-      city = "NYC"
-      state = "New York"
-      zip = 10001
-
-      fill_in "Name", with: name
-      fill_in "Address", with: address
-      fill_in "City", with: city
-      fill_in "State", with: state
-      fill_in "Zip", with: zip
-
-      click_button "Create Order"
-
-      expect(page).to have_content("Please complete address form to create an order.")
-      expect(page).to have_button("Create Order")
     end
   end
 end
