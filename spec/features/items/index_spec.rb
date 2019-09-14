@@ -67,17 +67,18 @@ RSpec.describe "Items Index Page" do
       item_6 = shop.items.create(attributes_for(:item, name: "watermelon"))
 
       user = create(:user)
-      order_1 = create(:order)
-      item_order_1 = user.item_orders.create!(order: order_1, item: item_6, quantity: 6, price: item_6.price)
-      item_order_2 = user.item_orders.create!(order: order_1, item: item_5, quantity: 5, price: item_5.price)
-      item_order_3 = user.item_orders.create!(order: order_1, item: item_4, quantity: 4, price: item_4.price)
-      item_order_4 = user.item_orders.create!(order: order_1, item: item_3, quantity: 3, price: item_3.price)
+      address_1 = user.addresses.create(name: user.name, street_address: user.address, city: user.city, state: user.state, zipcode: user.zipcode, nickname: 'home')
+      order_1 = address_1.orders.create
+      item_order_1 = order_1.item_orders.create(item: item_6, quantity: 6, price: item_6.price)
+      item_order_2 = order_1.item_orders.create(item: item_5, quantity: 5, price: item_5.price)
+      item_order_3 = order_1.item_orders.create(item: item_4, quantity: 4, price: item_4.price)
+      item_order_4 = order_1.item_orders.create(item: item_3, quantity: 3, price: item_3.price)
 
-      order_2 = create(:order)
-      item_order_5 = user.item_orders.create!(order: order_2, item: item_6, quantity: 6, price: item_6.price)
-      item_order_6 = user.item_orders.create!(order: order_2, item: item_1, quantity: 1, price: item_1.price)
-      item_order_7 = user.item_orders.create!(order: order_2, item: item_2, quantity: 2, price: item_2.price)
-      item_order_8 = user.item_orders.create!(order: order_2, item: item_3, quantity: 3, price: item_3.price)
+      order_2 = address_1.orders.create
+      item_order_5 = order_2.item_orders.create(item: item_6, quantity: 6, price: item_6.price)
+      item_order_6 = order_2.item_orders.create(item: item_1, quantity: 1, price: item_1.price)
+      item_order_7 = order_2.item_orders.create(item: item_2, quantity: 2, price: item_2.price)
+      item_order_8 = order_2.item_orders.create(item: item_3, quantity: 3, price: item_3.price)
 
       visit items_path
 
