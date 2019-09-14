@@ -62,18 +62,6 @@ RSpec.describe "As an admin user" do
       visit "/cart"
       click_on "Checkout"
 
-      name = "Bert"
-      address = "123 Sesame St."
-      city = "NYC"
-      state = "New York"
-      zip = 10001
-
-      fill_in "Name", with: name
-      fill_in "Address", with: address
-      fill_in "City", with: city
-      fill_in "State", with: state
-      fill_in "Zip", with: zip
-
       click_button "Create Order"
 
       visit merchants_path

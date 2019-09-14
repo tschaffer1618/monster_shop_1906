@@ -23,6 +23,7 @@
 <h3 align = "right">Total: <%= number_to_currency(cart.total)%></h3>
 <center>
   <%= form_for(@order, url: "/profile/orders") do |f| %>
+    <%= f.hidden_field :status, value: 'pending' %>
     <%= f.submit %>
   <% end %>
 </center>
