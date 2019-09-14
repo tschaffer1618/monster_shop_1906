@@ -35,14 +35,14 @@ describe Item, type: :model do
 
       @order_1 = @address_1.orders.create(status: "pending")
       @order_2 = @address_2.orders.create(status: "pending")
-        @item_order_1 = @order_2.item_orders.create(item: @watch, quantity: 2, price: @watch.price, user: @user, fulfilled?: false)
+        @item_order_1 = @order_2.item_orders.create(item: @watch, quantity: 2, price: @watch.price, fulfilled?: false)
     end
 
-    xit "calculate average review" do
+    it "calculate average review" do
       expect(@chain.average_review).to eq(3.0)
     end
 
-    xit "sorts reviews" do
+    it "sorts reviews" do
       top_three = @chain.sorted_reviews(3,:desc)
       bottom_three = @chain.sorted_reviews(3,:asc)
 
@@ -50,29 +50,29 @@ describe Item, type: :model do
       expect(bottom_three).to eq([@review_3,@review_4,@review_5])
     end
 
-    xit 'no orders' do
+    it 'no orders' do
       expect(@chain.no_orders?).to eq(true)
 
       @order_1.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
       expect(@chain.no_orders?).to eq(false)
     end
 
-    xit 'return a cannot fulfill message' do
+    it 'return a cannot fulfill message' do
       expect(@chain.cannot_fulfill_message).to eq("Cannot fulfill. Only #{@chain.inventory} remaining.")
       expect(@bike.cannot_fulfill_message).to eq("Cannot fulfill. There are no #{@bike.name} items remaining.")
     end
 
-    xit 'can decrease inventory' do
+    it 'can decrease inventory' do
       @chain.decrease_inventory(@item_order_1)
       expect(@chain.inventory).to eq(3)
     end
 
-    xit "can increase inventory" do
+    it "can increase inventory" do
       @chain.increase_inventory(@item_order_1)
       expect(@chain.inventory).to eq(7)
     end
 
-    xit "can toggle status" do
+    it "can toggle status" do
       expect(@chain.active?).to be true
       @chain.toggle_status
       expect(@chain.active?).to be false
@@ -80,7 +80,7 @@ describe Item, type: :model do
   end
 
   describe "top and bottom five" do
-    xit "shows an area with statistics of top/bottom 5 most/least popular items (by quantity purchased), plus that quantity" do
+    it "shows an area with statistics of top/bottom 5 most/least popular items (by quantity purchased), plus that quantity" do
       shop = create(:merchant)
       item_1 = shop.items.create(attributes_for(:item, name: "apple"))
       item_2 = shop.items.create(attributes_for(:item, name: "orange"))
@@ -91,17 +91,19 @@ describe Item, type: :model do
       items = [item_1, item_2, item_3, item_4, item_5, item_6]
 
       user = create(:user)
-      order_1 = create(:order)
-      item_order_1 = user.item_orders.create!(order: order_1, item: item_6, quantity: 6, price: item_6.price)
-      item_order_2 = user.item_orders.create!(order: order_1, item: item_5, quantity: 5, price: item_5.price)
-      item_order_3 = user.item_orders.create!(order: order_1, item: item_4, quantity: 4, price: item_4.price)
-      item_order_4 = user.item_orders.create!(order: order_1, item: item_3, quantity: 3, price: item_3.price)
+      address_1 = user.addresses.create(name: user.name, street_address: user.address, city: user.city, state: user.state, zipcode: user.zipcode, nickname: 'home')
 
-      order_2 = create(:order)
-      item_order_5 = user.item_orders.create!(order: order_2, item: item_6, quantity: 6, price: item_6.price)
-      item_order_6 = user.item_orders.create!(order: order_2, item: item_1, quantity: 1, price: item_1.price)
-      item_order_7 = user.item_orders.create!(order: order_2, item: item_2, quantity: 2, price: item_2.price)
-      item_order_8 = user.item_orders.create!(order: order_2, item: item_3, quantity: 3, price: item_3.price)
+      order_1 = address_1.orders.create
+      item_order_1 = order_1.item_orders.create(item: item_6, quantity: 6, price: item_6.price)
+      item_order_2 = order_1.item_orders.create(item: item_5, quantity: 5, price: item_5.price)
+      item_order_3 = order_1.item_orders.create(item: item_4, quantity: 4, price: item_4.price)
+      item_order_4 = order_1.item_orders.create(item: item_3, quantity: 3, price: item_3.price)
+
+      order_2 = address_1.orders.create
+      item_order_5 = order_2.item_orders.create(item: item_6, quantity: 6, price: item_6.price)
+      item_order_6 = order_2.item_orders.create(item: item_1, quantity: 1, price: item_1.price)
+      item_order_7 = order_2.item_orders.create(item: item_2, quantity: 2, price: item_2.price)
+      item_order_8 = order_2.item_orders.create(item: item_3, quantity: 3, price: item_3.price)
 
       expect(Item.top_5.map { |item| item.name }).to eq([item_6.name, item_3.name, item_5.name, item_4.name, item_2.name])
       expect(Item.bottom_5.map { |item| item.name }).to eq([item_1.name, item_2.name, item_4.name, item_5.name, item_3.name])
