@@ -40,6 +40,7 @@
         <p><%=  address.name %></p>
         <p><%= address.street_address %></p>
         <p><%= address.city %>, <%= address.state %> <%= address.zipcode %></p>
+        <%= link_to "Edit Address", "profile/addresses/#{address.id}/edit", class: "lead btn btn-info" %>
       </section>
     <% end %>
   </section>
