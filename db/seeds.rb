@@ -8,6 +8,7 @@
 
 ItemOrder.destroy_all
 Order.destroy_all
+Address.destroy_all
 User.destroy_all
 Review.destroy_all
 Item.destroy_all
@@ -78,21 +79,25 @@ review_34 = dundie.reviews.create(title: 'Title 4', content: "This is content fo
 review_35 = dundie.reviews.create(title: 'Title 5', content: "This is content for review 5", rating: 6)
 
 #users
-regular_user_1 = User.create!(name: "George Jungle",
+regular_user_1 = User.create(name: "George Jungle",
               address: "1 Jungle Way",
               city: "Jungleopolis",
               state: "FL",
               zipcode: "77652",
               email: "junglegeorge@email.com",
               password: "Tree123")
-regular_user_2 = User.create!(name: "John Testing",
+address_1 = regular_user_1.addresses.create(name: regular_user_1.name, street_address: regular_user_1.address, city: regular_user_1.city, state: regular_user_1.state, zipcode: regular_user_1.zipcode)
+
+regular_user_2 = User.create(name: "John Testing",
               address: "123 Testing Lane",
               city: "Testico",
               state: "TE",
               zipcode: "77639",
               email: "regular_user_1@email.com",
               password: "Password123")
-merchant_employee = User.create!(name: "Dwight Schrute",
+address_2 = regular_user_2.addresses.create(name: regular_user_2.name, street_address: regular_user_2.address, city: regular_user_2.city, state: regular_user_2.state, zipcode: regular_user_2.zipcode)
+
+merchant_employee = User.create(name: "Dwight Schrute",
               address: "175 Beet Rd",
               city: "Scranton",
               state: "PA",
@@ -101,7 +106,9 @@ merchant_employee = User.create!(name: "Dwight Schrute",
               password: "IdentityTheftIsNotAJoke",
               role: 1,
               merchant: dunder)
-merchant_admin = User.create!(name: "Michael Scott",
+address_3 = merchant_employee.addresses.create(name: merchant_employee.name, street_address: merchant_employee.address, city: merchant_employee.city, state: merchant_employee.state, zipcode: merchant_employee.zipcode)
+
+merchant_admin = User.create(name: "Michael Scott",
               address: "1725 Slough Ave",
               city: "Scranton",
               state: "PA",
@@ -110,7 +117,9 @@ merchant_admin = User.create!(name: "Michael Scott",
               password: "WorldBestBoss",
               role: 2,
               merchant: dunder)
-admin_user = User.create!(name: "Leslie Knope",
+address_4 = merchant_admin.addresses.create(name: merchant_admin.name, street_address: merchant_admin.address, city: merchant_admin.city, state: merchant_admin.state, zipcode: merchant_admin.zipcode)
+
+admin_user = User.create(name: "Leslie Knope",
               address: "14 Somewhere Ave",
               city: "Pawnee",
               state: "IN",
@@ -119,26 +128,25 @@ admin_user = User.create!(name: "Leslie Knope",
               password: "Waffles",
               role: 3)
 
-order_1 = Order.create!(name: "Beth", address: "123 Happy St", city: "Denver", state: "CO", zip: "80205", status: 0)
-  item_order_1 = ItemOrder.create!(order: order_1, item: tire, quantity: 2, price: tire.price, user: regular_user_1, fulfilled?: 0)
-  item_order_2 = ItemOrder.create!(order: order_1, item: bike, quantity: 5, price: bike.price, user: regular_user_1, fulfilled?: 0)
-  item_order_3 = ItemOrder.create!(order: order_1, item: watch, quantity: 5, price: watch.price, user: regular_user_1, fulfilled?: 0)
+order_1 = address_1.orders.create(status: 0)
+  item_order_1 = order_1.item_orders.create(item: tire, quantity: 2, price: tire.price, fulfilled?: 0)
+  item_order_2 = order_1.item_orders.create(item: bike, quantity: 5, price: bike.price, fulfilled?: 0)
+  item_order_3 = order_1.item_orders.create(item: watch, quantity: 5, price: watch.price, fulfilled?: 0)
 
-order_2 = Order.create(name: "John", address: "123 West St", city: "Golden", state: "CO", zip: "56600", status: 0)
-  item_order_4 = ItemOrder.create(order: order_2, item: bike, quantity: 12, price: bike.price, user: regular_user_2)
-  item_order_5 = ItemOrder.create(order: order_2, item: dog_bone, quantity: 3, price: dog_bone.price, user: regular_user_2)
+order_2 = address_2.orders.create(status: 0)
+  item_order_4 = order_2.item_orders.create(item: bike, quantity: 12, price: bike.price)
+  item_order_5 = order_2.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
 
+order_3 = address_1.orders.create
+  item_order_6 = order_3.item_orders.create(item: pull_toy, quantity: 4, price: pull_toy.price)
+  item_order_7 = order_3.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
+  item_order_8 = order_3.item_orders.create(item: tire, quantity: 1, price: tire.price)
+  item_order_9 = order_3.item_orders.create(item: bike, quantity: 1, price: bike.price)
 
-order_3 = Order.create(name: "Amber", address: "123 East St", city: "Denver", state: "CO", zip: "80205")
-  item_order_6 = ItemOrder.create(order: order_3, item: pull_toy, quantity: 4, price: pull_toy.price, user: regular_user_1)
-  item_order_7 = ItemOrder.create(order: order_3, item: dog_bone, quantity: 3, price: dog_bone.price, user: regular_user_1)
-  item_order_8 = ItemOrder.create(order: order_3, item: tire, quantity: 1, price: tire.price, user: regular_user_1)
-  item_order_9 = ItemOrder.create(order: order_3, item: bike, quantity: 1, price: bike.price, user: regular_user_1)
+order_4 = address_2.orders.create
+  item_order_10 = order_4.item_orders.create(item: pull_toy, quantity: 4, price: pull_toy.price)
+  item_order_11 = order_4.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
 
-order_4 = Order.create(name: "Matt", address: "123 North St", city: "Chicago", state: "IL", zip: "60701")
-  item_order_10 = ItemOrder.create(order: order_4, item: pull_toy, quantity: 4, price: pull_toy.price, user: regular_user_2)
-  item_order_11 = ItemOrder.create(order: order_4, item: dog_bone, quantity: 3, price: dog_bone.price, user: regular_user_2)
-
-order_5 = Order.create(name: "Mr. Roger", address: "The Neighborhood", city: "Olympia", state: "Washington", zip: "90701")
-  item_order_12 = ItemOrder.create(order: order_5, item: pull_toy, quantity: 4, price: pull_toy.price, user: regular_user_2)
-  item_order_13 = ItemOrder.create(order: order_5, item: dog_bone, quantity: 3, price: dog_bone.price, user: regular_user_2)
+order_5 = address_2.orders.create
+  item_order_12 = order_5.item_orders.create(item: pull_toy, quantity: 4, price: pull_toy.price)
+  item_order_13 = order_5.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
