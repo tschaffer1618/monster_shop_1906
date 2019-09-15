@@ -36,6 +36,13 @@ class AddressesController < ApplicationController
     end
   end
 
+  def destroy
+    address = Address.find(params[:address_id])
+    address.destroy
+    flash[:success] = "Shipping address deleted"
+    redirect_to profile_path
+  end
+
   private
 
   def address_params

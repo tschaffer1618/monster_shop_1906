@@ -40,7 +40,8 @@
         <p><%=  address.name %></p>
         <p><%= address.street_address %></p>
         <p><%= address.city %>, <%= address.state %> <%= address.zipcode %></p>
-        <%= link_to "Edit Address", "profile/addresses/#{address.id}/edit", class: "lead btn btn-info" %>
+        <%= link_to "Edit", "/profile/addresses/#{address.id}/edit", class: "btn btn-info" %>
+        <%= link_to "Delete", "/profile/addresses/#{address.id}", method: :delete, :confirm => "Are you sure ?", class: "btn btn-danger" %>
       </section>
     <% end %>
   </section>

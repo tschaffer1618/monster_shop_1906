@@ -12,7 +12,7 @@ describe 'As a user' do
     visit profile_path
 
     within "#address-#{@address_1.id}" do
-      click_link "Edit Address"
+      click_link "Edit"
     end
 
     expect(current_path).to eq("/profile/addresses/#{@address_1.id}/edit")
@@ -50,7 +50,7 @@ describe 'As a user' do
     visit profile_path
 
     within "#address-#{@address_1.id}" do
-      click_link "Edit Address"
+      click_link "Edit"
     end
 
     expect(current_path).to eq("/profile/addresses/#{@address_1.id}/edit")
