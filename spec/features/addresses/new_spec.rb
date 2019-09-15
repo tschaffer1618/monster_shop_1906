@@ -13,7 +13,7 @@ describe 'As a user' do
 
     click_link "Create a New Shipping Address"
 
-    expect(current_path).to eq(profile_addresses_new_path)
+    expect(current_path).to eq(profile_addresses_path)
 
     name = 'Fred Flintstone'
     street_address = '13 Mulberry Court'
@@ -44,5 +44,32 @@ describe 'As a user' do
       expect(page).to have_content(new_address.state)
       expect(page).to have_content(new_address.zipcode)
     end
+  end
+
+  it 'I cannot create a new shipping address if the form is not filled in' do
+    visit profile_path
+
+    click_link "Create a New Shipping Address"
+
+    expect(current_path).to eq(profile_addresses_path)
+
+    name = 'Fred Flintstone'
+    street_address = '13 Mulberry Court'
+    city = 'Cave'
+    state = 'BC'
+    zipcode = '34567'
+    nickname = "fred's house"
+
+    fill_in 'Name', with: name
+    fill_in 'Street address', with: ""
+    fill_in 'City', with: city
+    fill_in 'State', with: state
+    fill_in 'Zipcode', with: zipcode
+    fill_in 'Nickname', with: ""
+
+    click_button "Create Address"
+
+    expect(current_path).to eq(profile_addresses_path)
+    expect(page).to have_content("Street address can't be blank and Nickname can't be blank")
   end
 end

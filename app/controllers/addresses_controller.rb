@@ -15,7 +15,7 @@ class AddressesController < ApplicationController
       flash[:success] = "New shipping address created"
       redirect_to profile_path
     else
-      flash[:error] = @address.errors.full_messages.to_sentence
+      flash.now[:error] = @address.errors.full_messages.to_sentence
       render :new
     end
   end
