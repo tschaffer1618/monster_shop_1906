@@ -24,3 +24,23 @@
   </section>
 </center>
 </div>
+
+<center>
+  <h2>My Shipping Addresses</h2>
+</center>
+<%  if @user.addresses.empty? %>
+  <center>
+  <h3>You have no shipping addresses</h3>
+  </center>
+<% else %>
+  <section class="grid-container">
+    <% @user.addresses.each do |address| %>
+      <section class = "grid-item" id= 'address-<%=address.id%>'>
+        <h2><%= address.nickname.capitalize %></h2>
+        <p><%=  address.name %></p>
+        <p><%= address.street_address %></p>
+        <p><%= address.city %>, <%= address.state %> <%= address.zipcode %></p>
+      </section>
+    <% end %>
+  </section>
+<% end %>
