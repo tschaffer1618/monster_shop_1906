@@ -9,7 +9,7 @@ RSpec.describe "Merchant Items Page" do
 
       user = create(:user)
       address_1 = user.addresses.create(name: user.name, street_address: user.address, city: user.city, state: user.state, zipcode: user.zipcode, nickname: 'home')
-      order = address_1.orders.create
+      order = address_1.orders.create(user: user)
       item_order = order.item_orders.create(item: @item_1, quantity: 1, price: @item_1.price)
 
       merchant_admin = create(:user, role: 2, merchant: @shop)

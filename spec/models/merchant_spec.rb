@@ -27,7 +27,7 @@ describe Merchant, type: :model do
     it 'no_orders' do
       expect(@meg.no_orders?).to eq(true)
 
-      order_1 = @address_1.orders.create
+      order_1 = @address_1.orders.create(user: @user)
       item_order_1 = order_1.item_orders.create(item: @tire, price: @tire.price, quantity: 2)
 
       expect(@meg.no_orders?).to eq(false)
@@ -52,9 +52,9 @@ describe Merchant, type: :model do
       address_2 = user.addresses.create(name: user.name, street_address: user.address, city: 'Hershey', state: user.state, zipcode: user.zipcode, nickname: 'home')
       address_3 = user.addresses.create(name: user.name, street_address: '12 Test Way', city: 'Denver', state: user.state, zipcode: user.zipcode, nickname: 'home')
 
-      order_1 = address_1.orders.create
-      order_2 = address_2.orders.create
-      order_3 = address_3.orders.create
+      order_1 = address_1.orders.create(user: user)
+      order_2 = address_2.orders.create(user: user)
+      order_3 = address_3.orders.create(user: user)
       order_1.item_orders.create(item: @tire, price: @tire.price, quantity: 2)
       order_2.item_orders.create(item: chain, price: chain.price, quantity: 2)
       order_3.item_orders.create(item: @tire, price: @tire.price, quantity: 2)
@@ -87,8 +87,8 @@ describe Merchant, type: :model do
     it "pending_orders" do
       user = create(:user)
       address_1 = user.addresses.create(name: user.name, street_address: user.address, city: 'Denver', state: user.state, zipcode: user.zipcode, nickname: 'home')
-      order_1 = address_1.orders.create(status: 'pending')
-      order_2 = address_1.orders.create(status: 'packaged')
+      order_1 = address_1.orders.create(status: 'pending', user: user)
+      order_2 = address_1.orders.create(status: 'packaged', user: user)
       item_order_1 = order_1.item_orders.create(item: @tire, price: @tire.price, quantity: 2)
       expect(@meg.pending_orders).to eq([order_1])
     end

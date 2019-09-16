@@ -24,3 +24,30 @@
   </section>
 </center>
 </div>
+
+<center>
+  <h2>My Shipping Addresses</h2>
+</center>
+<%  if @user.addresses.empty? %>
+  <center>
+  <h3>You have no shipping addresses</h3>
+  </center>
+<% else %>
+  <section class="grid-container">
+    <% @user.addresses.each do |address| %>
+      <section class = "grid-item" id= 'address-<%=address.id%>'>
+        <h2><%= address.nickname.capitalize %></h2>
+        <p><%=  address.name %></p>
+        <p><%= address.street_address %></p>
+        <p><%= address.city %>, <%= address.state %> <%= address.zipcode %></p>
+        <% unless address.shipped_to? %>
+          <%= link_to "Edit", "/profile/addresses/#{address.id}/edit", class: "btn btn-info" %>
+          <%= link_to "Delete", "/profile/addresses/#{address.id}", method: :delete, :confirm => "Are you sure ?", class: "btn btn-danger" %>
+        <% end %>
+      </section>
+    <% end %>
+  </section>
+<% end %>
+<center>
+  <%= link_to "Create a New Shipping Address", "/profile/addresses", class: "btn btn-success" %>
+</center>

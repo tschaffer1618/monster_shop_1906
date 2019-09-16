@@ -1,7 +1,8 @@
 class Order < ApplicationRecord
   validates_presence_of :status
 
-  belongs_to :address
+  belongs_to :address, optional: true 
+  belongs_to :user
   has_many :item_orders
   has_many :items, through: :item_orders
   has_many :merchants, through: :items

@@ -6,7 +6,8 @@ describe Order, type: :model do
   end
 
   describe "relationships" do
-    it { should belong_to :address }
+    it { should belong_to(:address).optional }
+    it { should belong_to(:user) }
     it { should have_many :item_orders }
     it { should have_many(:items).through(:item_orders) }
     it { should have_many(:merchants).through(:items) }
@@ -24,17 +25,17 @@ describe Order, type: :model do
       @address_1 = @user.addresses.create(name: @user.name, street_address: @user.address, city: @user.city, state: @user.state, zipcode: @user.zipcode, nickname: 'home')
       @address_2 = @user.addresses.create(name: 'Rex Dinosaur', street_address: '12 Toy Lane', city: 'Chicago', state: 'IL', zipcode: '75405', nickname: 'rex house')
 
-      @order_1 = @address_1.orders.create(status: 0)
+      @order_1 = @address_1.orders.create(status: 0, user: @user)
         @item_order_1 = @order_1.item_orders.create(item: @tire, price: @tire.price, quantity: 2, fulfilled?: true)
         @item_order_2 = @order_1.item_orders.create(item: @pull_toy, price: @pull_toy.price, quantity: 3, fulfilled?: true)
 
-      @order_2 = @address_1.orders.create(status: 1)
+      @order_2 = @address_1.orders.create(status: 1, user: @user)
         @item_order_3 = @order_2.item_orders.create(item: @tire, quantity: 100, price: @tire.price, fulfilled?: true)
 
-      @order_3 = @address_2.orders.create(status: 3)
+      @order_3 = @address_2.orders.create(status: 3, user: @user)
         @item_order_4 = @order_3.item_orders.create(item: @pull_toy, quantity: 18, price: @pull_toy.price, fulfilled?: true)
 
-      @order_4 = @address_2.orders.create(status: 2)
+      @order_4 = @address_2.orders.create(status: 2, user: @user)
         @item_order_5 = @order_4.item_orders.create(item: @tire, quantity: 15, price: @tire.price, fulfilled?: true)
     end
 
