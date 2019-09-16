@@ -8,6 +8,7 @@ RSpec.describe "As an admin user" do
 
       @bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Richmond', state: 'VA', zip: 11234)
     end
+    
     it 'I can see prepopulated info on that user in the edit form' do
       visit merchants_path
       click_on "Update"

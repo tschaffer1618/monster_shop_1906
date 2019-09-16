@@ -16,24 +16,24 @@ RSpec.describe "Admin Dashboard page" do
       @item_3 = @merchant_shop_2.items.create(attributes_for(:item, name: "Item 3", inventory: 20))
       @item_4 = @merchant_shop_2.items.create(attributes_for(:item, name: "Item 4", inventory: 10))
 
-    @order_1 = @address_1.orders.create
+    @order_1 = @address_1.orders.create(user: @regular_user_1)
       @item_order_1 = @order_1.item_orders.create(item: @item_1, quantity: 2, price: @item_1.price, fulfilled?: false)
       @item_order_2 = @order_1.item_orders.create(item: @item_2, quantity: 8, price: @item_2.price, fulfilled?: false)
       @item_order_3 = @order_1.item_orders.create(item: @item_3, quantity: 10, price: @item_3.price, fulfilled?: false)
 
-    @order_2 = @address_1.orders.create(status: 'packaged')
+    @order_2 = @address_1.orders.create(status: 'packaged', user: @regular_user_1)
       @item_order_4 = @order_2.item_orders.create(item: @item_2, quantity: 100, price: @item_2.price, fulfilled?: true)
 
-    @order_3 = @address_2.orders.create(status: 'shipped')
+    @order_3 = @address_2.orders.create(status: 'shipped', user: @regular_user_2)
       @item_order_5 = @order_3.item_orders.create(item: @item_4, quantity: 18, price: @item_4.price, fulfilled?: true)
 
-    @order_4 = @address_1.orders.create(status: 'cancelled')
+    @order_4 = @address_1.orders.create(status: 'cancelled', user: @regular_user_1)
       @item_order_6 = @order_4.item_orders.create(item: @item_5, quantity: 15, price: @item_5.price, fulfilled?: true)
 
-    @order_5 = @address_1.orders.create(status: 'pending')
+    @order_5 = @address_1.orders.create(status: 'pending', user: @regular_user_1)
       @item_order_7 = @order_5.item_orders.create(item: @item_1, quantity: 15, price: @item_1.price, fulfilled?: false)
 
-    @order_6 = @address_2.orders.create(status: 'packaged')
+    @order_6 = @address_2.orders.create(status: 'packaged', user: @regular_user_2)
       @item_order_8 = @order_6.item_orders.create(item: @item_3, quantity: 10, price: @item_3.price, fulfilled?: true)
 
     @admin_1 = create(:user, name: "Admin 1", role: 3)

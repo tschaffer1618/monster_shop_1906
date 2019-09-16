@@ -19,7 +19,7 @@ describe User, type: :model do
 
   describe "relationships" do
     it {should have_many :addresses}
-    it {should have_many(:orders).through(:addresses)}
+    it {should have_many :orders}
     it {should have_many(:item_orders).through(:orders)}
     it {should belong_to(:merchant).optional }
   end
@@ -114,11 +114,11 @@ describe User, type: :model do
         item_1 = merchant_shop_1.items.create(attributes_for(:item, name: "Item 1" ))
         item_2 = merchant_shop_1.items.create(attributes_for(:item, name: "Item 2"))
 
-      order_1 = address_1.orders.create
+      order_1 = address_1.orders.create(user: regular_user_1)
         item_order_1 = order_1.item_orders.create(item: item_1, quantity: 2, price: item_1.price)
         item_order_2 = order_1.item_orders.create(item: item_2, quantity: 8, price: item_2.price)
 
-      order_2 = address_1.orders.create
+      order_2 = address_1.orders.create(user: regular_user_1)
         item_order_4 = order_2.item_orders.create(item: item_2, quantity: 18, price: item_2.price)
 
       merchant_admin = create(:user, role: 2, merchant: merchant_shop_1)

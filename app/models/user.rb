@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true
 
   has_many :addresses
-  has_many :orders, through: :addresses
+  has_many :orders
   has_many :item_orders, through: :orders
   belongs_to :merchant, optional: true
 

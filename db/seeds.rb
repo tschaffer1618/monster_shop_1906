@@ -128,25 +128,25 @@ admin_user = User.create(name: "Leslie Knope",
               password: "Waffles",
               role: 3)
 
-order_1 = address_1.orders.create(status: 0)
+order_1 = address_1.orders.create(status: 0, user: regular_user_1)
   item_order_1 = order_1.item_orders.create(item: tire, quantity: 2, price: tire.price, fulfilled?: 0)
   item_order_2 = order_1.item_orders.create(item: bike, quantity: 5, price: bike.price, fulfilled?: 0)
   item_order_3 = order_1.item_orders.create(item: watch, quantity: 5, price: watch.price, fulfilled?: 0)
 
-order_2 = address_2.orders.create(status: 0)
+order_2 = address_2.orders.create(status: 0, user: regular_user_2)
   item_order_4 = order_2.item_orders.create(item: bike, quantity: 12, price: bike.price)
   item_order_5 = order_2.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
 
-order_3 = address_1.orders.create
+order_3 = address_1.orders.create(user: regular_user_1)
   item_order_6 = order_3.item_orders.create(item: pull_toy, quantity: 4, price: pull_toy.price)
   item_order_7 = order_3.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
   item_order_8 = order_3.item_orders.create(item: tire, quantity: 1, price: tire.price)
   item_order_9 = order_3.item_orders.create(item: bike, quantity: 1, price: bike.price)
 
-order_4 = address_2.orders.create
+order_4 = address_2.orders.create(user: regular_user_2)
   item_order_10 = order_4.item_orders.create(item: pull_toy, quantity: 4, price: pull_toy.price)
   item_order_11 = order_4.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
 
-order_5 = address_2.orders.create
+order_5 = address_2.orders.create(user: regular_user_2)
   item_order_12 = order_5.item_orders.create(item: pull_toy, quantity: 4, price: pull_toy.price)
   item_order_13 = order_5.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
