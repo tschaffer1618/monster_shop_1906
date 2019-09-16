@@ -26,20 +26,29 @@ class AddressesController < ApplicationController
 
   def update
     @address = Address.find(params[:address_id])
-    @address.update(address_params)
-    if @address.save
-      flash[:success] = "Shipping address updated"
+    if @address.shipped_to?
+      flash[:error] = "You cannot change an address with orders shipped to it"
       redirect_to profile_path
     else
-      flash[:error] = @address.errors.full_messages.to_sentence
-      render :edit
+      @address.update(address_params)
+      if @address.save
+        flash[:success] = "Shipping address updated"
+        redirect_to profile_path
+      else
+        flash[:error] = @address.errors.full_messages.to_sentence
+        render :edit
+      end
     end
   end
 
   def destroy
     address = Address.find(params[:address_id])
-    address.destroy
-    flash[:success] = "Shipping address deleted"
+    if address.shipped_to?
+      flash[:error] = "You cannot delete an address with orders shipped to it"
+    else
+      address.destroy
+      flash[:success] = "Shipping address deleted"
+    end
     redirect_to profile_path
   end
 

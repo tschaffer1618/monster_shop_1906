@@ -3,4 +3,8 @@ class Address < ApplicationRecord
 
   belongs_to :user
   has_many :orders
+
+  def shipped_to?
+    !(orders.find_by(status: 'shipped').nil?)
+  end
 end

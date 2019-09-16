@@ -137,7 +137,7 @@ order_2 = address_2.orders.create(status: 0, user: regular_user_2)
   item_order_4 = order_2.item_orders.create(item: bike, quantity: 12, price: bike.price)
   item_order_5 = order_2.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
 
-order_3 = address_1.orders.create(user: regular_user_1)
+order_3 = address_1.orders.create(status: 2, user: regular_user_1)
   item_order_6 = order_3.item_orders.create(item: pull_toy, quantity: 4, price: pull_toy.price)
   item_order_7 = order_3.item_orders.create(item: dog_bone, quantity: 3, price: dog_bone.price)
   item_order_8 = order_3.item_orders.create(item: tire, quantity: 1, price: tire.price)
