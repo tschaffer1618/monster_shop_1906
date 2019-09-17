@@ -32,7 +32,11 @@
                 <td><%= item_order.price %></td>
                 <td><%= item_order.quantity %></td>
                 <td><%= item_order.subtotal %></td>
-                <td><%= item_order.order.to_s %></td>
+                <% if item_order.order.address.nil? %>
+                  <td>Assign a shipping address to this order</td>
+                <% else %>
+                  <td><%= item_order.order.to_s %></td>
+                <% end %>
                 <td><%= item_order.created_at %></td>
                 <td><%= item_order.updated_at %></td>
                 <td><%= item_order.order.status %></td>
