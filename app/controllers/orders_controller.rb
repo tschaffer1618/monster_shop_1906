@@ -17,7 +17,8 @@ class OrdersController < ApplicationController
 
   def create
     @user = current_user
-    @order = @user.orders.create(order_params)
+    @address = Address.find(session[:address])
+    @order = @user.orders.create(status: params[:order][:status], address: @address)
     if @order.save
       cart.items.each do |item,quantity|
         @order.item_orders.create({
