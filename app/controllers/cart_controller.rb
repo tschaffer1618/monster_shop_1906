@@ -40,11 +40,4 @@ class CartController < ApplicationController
     end
     redirect_to "/cart"
   end
-
-  # def add_address
-  #   address = Address.find(params[:address_id])
-  #   cart.add_address(address)
-  #   flash[:success] = "You have chosen a shipping address"
-  #   redirect_to "/cart"
-  # end
 end
