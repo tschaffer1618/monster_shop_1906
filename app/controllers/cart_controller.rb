@@ -14,6 +14,7 @@ class CartController < ApplicationController
   end
 
   def show
+    @user = current_user
     if visitor_with_items?
       flash.now[:error] = "Please #{view_context.link_to 'register', register_path} or #{view_context.link_to 'login', login_path} to continue your checkout process.".html_safe
     end
@@ -39,4 +40,11 @@ class CartController < ApplicationController
     end
     redirect_to "/cart"
   end
+
+  # def add_address
+  #   address = Address.find(params[:address_id])
+  #   cart.add_address(address)
+  #   flash[:success] = "You have chosen a shipping address"
+  #   redirect_to "/cart"
+  # end
 end

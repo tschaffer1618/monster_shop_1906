@@ -16,6 +16,8 @@ RSpec.describe("New Order Page") do
                     email: "junglegeorge@email.com",
                     password: "Tree123")
 
+      @address_1 = @regular_user.addresses.create(name: @regular_user.name, street_address: @regular_user.address, city: @regular_user.city, state: @regular_user.state, zipcode: @regular_user.zipcode, nickname: 'home')
+
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@regular_user)
 
       visit item_path(@paper)
@@ -30,6 +32,8 @@ RSpec.describe("New Order Page") do
 
     it "I see all the information about my current cart" do
       visit "/cart"
+
+      click_link "Choose This Address"
 
       click_on "Checkout"
 

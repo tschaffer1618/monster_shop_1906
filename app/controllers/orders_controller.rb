@@ -28,6 +28,7 @@ class OrdersController < ApplicationController
           })
       end
       session.delete(:cart)
+      session.delete(:address)
       flash[:order] = "Your order has been created!"
       redirect_to "/profile/orders"
     else

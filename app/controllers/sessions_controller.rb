@@ -33,6 +33,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def add_address
+    address = Address.find(params[:address_id])
+    session[:address] = address.id
+    flash[:success] = "You have chosen a shipping address"
+    redirect_to "/cart"
+  end
+
   def destroy
     session.delete(:user_id)
     current_user = nil

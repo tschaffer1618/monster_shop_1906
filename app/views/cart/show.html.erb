@@ -46,11 +46,27 @@
 </table>
   <p>Total: <%= number_to_currency(cart.total) %></p>
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
-  <% unless current_user.nil? %>
+  <% if !(current_user.nil?) && !(session[:address].nil?) %>
     <p><%= link_to "Checkout", '/profile/orders/new', method: :get %></p>
-    <% end %>
+  <% end %>
 <% else %>
   <h3 align= "center">Cart is currently empty</h3>
 <% end %>
 <table>
+<% if session[:address].nil? %>
+  <section class="grid-container">
+    <% if @user %>
+      <h2>Choose a shipping address:</h2>
+      <% @user.addresses.each do |address| %>
+        <section class = "grid-item" id= 'address-<%=address.id%>'>
+          <h2><%= address.nickname.capitalize %></h2>
+          <p><%=  address.name %></p>
+          <p><%= address.street_address %></p>
+          <p><%= address.city %>, <%= address.state %> <%= address.zipcode %></p>
+          <%= link_to "Choose This Address", "/cart/addresses/#{address.id}/add", method: :patch, class: "btn btn-success" %>
+        </section>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>
 </center>

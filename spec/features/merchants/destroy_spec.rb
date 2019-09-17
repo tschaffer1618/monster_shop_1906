@@ -62,6 +62,9 @@ RSpec.describe "As an admin user" do
       click_on "Add To Cart"
 
       visit "/cart"
+
+      click_link "Choose This Address"
+
       click_on "Checkout"
 
       click_button "Create Order"
