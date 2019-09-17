@@ -38,6 +38,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  def change_address
+    @user = current_user
+    @order = Order.find(params[:order_id])
+  end
+
+  def update_address
+    order = Order.find(params[:order_id])
+    address = Address.find(params[:address_id])
+    order.update(address: address)
+    redirect_to "/profile/orders/#{order.id}"
+  end
+
   private
   def order_params
     params.require(:order).permit(:status)
