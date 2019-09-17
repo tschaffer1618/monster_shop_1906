@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  patch "/cart/addresses/:address_id/add", to: "sessions#add_address"
+
+  get "/profile/orders/:order_id/change_address", to: "orders#change_address"
+  patch "/profile/orders/:order_id/:address_id/update_address", to: "orders#update_address"
 
   namespace :merchant do
     get "/", to: "dashboard#index", as: :user

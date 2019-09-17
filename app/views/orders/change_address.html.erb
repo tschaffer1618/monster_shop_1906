@@ -1,0 +1,11 @@
+<section class="grid-container">
+  <% @user.addresses.each do |address| %>
+    <section class = "grid-item" id= 'address-<%=address.id%>'>
+      <h2><%= address.nickname.capitalize %></h2>
+      <p><%=  address.name %></p>
+      <p><%= address.street_address %></p>
+      <p><%= address.city %>, <%= address.state %> <%= address.zipcode %></p>
+      <%= link_to "Choose This Address", "/profile/orders/#{@order.id}/#{address.id}/update_address", method: :patch, class: "btn btn-success" %>
+    </section>
+  <% end %>
+</section>

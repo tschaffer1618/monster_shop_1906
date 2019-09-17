@@ -31,6 +31,9 @@ RSpec.describe("Order Creation") do
       click_on "Add To Cart"
 
       visit "/cart"
+
+      click_link "Choose This Address"
+
       click_on "Checkout"
     end
 

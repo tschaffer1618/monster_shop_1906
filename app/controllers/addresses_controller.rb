@@ -43,9 +43,13 @@ class AddressesController < ApplicationController
 
   def destroy
     address = Address.find(params[:address_id])
+    orders = Order.where(address_id: address.id)
     if address.shipped_to?
       flash[:error] = "You cannot delete an address with orders shipped to it"
     else
+      orders.each do |order|
+        order.update(address: nil)
+      end
       address.destroy
       flash[:success] = "Shipping address deleted"
     end
