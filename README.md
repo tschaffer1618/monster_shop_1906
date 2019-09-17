@@ -7,7 +7,10 @@ BE Mod 2 Week 6 Solo Project
 
 Week 6 additions:
 - gem orderly (for testing this.before.that)
-- new table called 'addresses' (address info is removed from 'orders', and each order has a user and an optional address)
+- new table called 'addresses' 
+  - address info is removed from orders
+  - each order has a user and an optional address
+  - user is removed from item_orders
 - CRUD functionality for addresses
   - addresses cannot be deleted or edited if shipped to
   - pending orders can have their address changed
