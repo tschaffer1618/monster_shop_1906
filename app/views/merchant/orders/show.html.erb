@@ -1,21 +1,25 @@
 <section id = "shipping-address">
   <h1 align = "center">Shipping Information</h1>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
-    </tr>
-    <tr>
-      <td><p><%= @order.address.name %> </p></td>
-      <td><p><%= @order.address.street_address %> </p></td>
-      <td><p><%= @order.address.city %> </p></td>
-      <td><p><%= @order.address.state %> </p></td>
-      <td><p><%= @order.address.zipcode %> </p></td>
-    </tr>
-  </table>
+  <% if @order.address.nil? %>
+    <h2>This user must assign a shipping address</h2>
+  <% else %>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+      </tr>
+      <tr>
+        <td><p><%= @order.address.name %> </p></td>
+        <td><p><%= @order.address.street_address %> </p></td>
+        <td><p><%= @order.address.city %> </p></td>
+        <td><p><%= @order.address.state %> </p></td>
+        <td><p><%= @order.address.zipcode %> </p></td>
+      </tr>
+    </table>
+  <% end %>
 </section>
 
 <br>
