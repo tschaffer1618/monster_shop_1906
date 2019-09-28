@@ -21,11 +21,11 @@ class AddressesController < ApplicationController
   end
 
   def edit
-    @address = Address.find(params[:address_id])
+    @address = Address.find(params[:id])
   end
 
   def update
-    @address = Address.find(params[:address_id])
+    @address = Address.find(params[:id])
     if @address.shipped_to?
       flash[:error] = "You cannot change an address with orders shipped to it"
       redirect_to profile_path
@@ -42,8 +42,8 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    address = Address.find(params[:address_id])
-    orders = Order.where(address_id: address.id)
+    address = Address.find(params[:id])
+    orders = Order.where(id: address.id)
     if address.shipped_to?
       flash[:error] = "You cannot delete an address with orders shipped to it"
     else

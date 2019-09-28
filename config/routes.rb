@@ -50,15 +50,14 @@ Rails.application.routes.draw do
   get "/profile/edit_password", to: "users#edit_password"
   patch "/profile/update_password", to: "users#update_password"
   get "/profile/orders", to: "users#show_orders"
-  post "/profile/orders", to: "orders#create"
-  get "/profile/orders/new", to: "orders#new"
-  get "/profile/orders/:id", to: "users#show_order"
 
-  get "/profile/addresses", to: "addresses#new"
-  post "/profile/addresses", to: "addresses#create"
-  get "/profile/addresses/:address_id/edit", to: "addresses#edit"
-  patch "/profile/addresses/:address_id", to: "addresses#update"
-  delete "/profile/addresses/:address_id", to: "addresses#destroy"
+  scope path: 'profile' do
+    get '/addresses', to: "addresses#new", as: :profile_addresses
+    resources :addresses, except: [:new, :index]
+    resources :orders, only: [:create, :new]
+  end
+
+  get "/profile/orders/:id", to: "users#show_order"
 
   post "/cart/:item_id", to: "cart#add_item"
   get "/cart", to: "cart#show"
